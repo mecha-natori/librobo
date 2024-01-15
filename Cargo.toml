@@ -1,0 +1,22 @@
+[package]
+authors = ["ms0503"]
+edition = "2021"
+readme = "README.md"
+name = "librobo"
+version = "0.1.0"
+
+[dependencies]
+cortex-m = "0.7"
+cortex-m-rt = "0.7"
+embedded-hal = "1.0"
+nb = "1"
+panic-halt = "0.2"
+stm32f4xx-hal = { features = ["stm32f407"], version = "0.20" }
+
+[lib]
+name = "librobo"
+
+[profile.release]
+codegen-units = 1
+debug = true
+lto = true
