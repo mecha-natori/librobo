@@ -1,0 +1,54 @@
+
+impl<A, B, D> MotorDriver<A, B, Tim1Ch1, D>
+where
+    A: InputPin,
+    B: InputPin,
+    D: OutputPin<Error = Box<dyn Error + 'static>>
+{
+    pub fn new(
+        max_speed: i32,
+        enc: Encoder<A, B>,
+        pwm: PwmChannel<Tim1Ch1, WithPins>,
+        dir: D
+    ) -> Self {
+        let dir = Direction::new(dir);
+        Self {
+            max_speed,
+            enc,
+            pwm,
+            dir
+        }
+    }
+}
+
+impl<A, B, D> IMotorDriver<A, B> for MotorDriver<A, B, Tim1Ch1, D>
+where
+    A: InputPin,
+    B: InputPin,
+    D: OutputPin<Error = Box<dyn Error + 'static>>
+{
+    fn init(&mut self) {
+        self.pwm.enable();
+    }
+
+    fn set_target(&mut self, speed: i32) -> Result<(), Box<dyn Error + 'static>> {
+        let dir = speed < 0;
+        let speed = speed.unsigned_abs();
+        let now = (self.enc.get_delta_rot() * 1000i32).unsigned_abs();
+        let kn = 4f32;
+        let gain_c1 = kn + 1f32 / kn;
+        let gain_c2 = 1f32 / kn;
+        let duty = (speed as f32 * gain_c1 - now as f32 * gain_c2) as u16;
+        self.pwm.set_duty(duty);
+        if dir {
+            self.dir.left()?;
+        } else {
+            self.dir.right()?;
+        }
+        Ok(())
+    }
+
+    fn get_max_speed(&self) -> i32 {
+        self.max_speed
+    }
+}

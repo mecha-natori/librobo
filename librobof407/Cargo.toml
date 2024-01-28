@@ -1,0 +1,16 @@
+[package]
+authors = ["Sora Tonami <ms0503@outlook.com>"]
+edition = "2021"
+name = "librobof407"
+readme = "../README.md"
+version = "0.1.0"
+
+[dependencies]
+cortex-m = { workspace = true }
+cortex-m-rt = { workspace = true }
+librobo-common = { path = "../librobo-common" }
+nb = { workspace = true }
+stm32f4xx-hal = { features = ["stm32f407"], workspace = true }
+
+[lib]
+name = "librobof407"

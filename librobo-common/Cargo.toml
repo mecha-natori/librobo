@@ -1,0 +1,11 @@
+[package]
+authors = ["Sora Tonami <ms0503@outlook.com>"]
+edition = "2021"
+name = "librobo-common"
+readme = "../README.md"
+version = "0.1.0"
+
+[dependencies]
+either = { workspace = true }
+embedded-hal = { workspace = true }
+rotary-encoder-hal = { workspace = true }

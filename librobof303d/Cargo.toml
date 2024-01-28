@@ -1,0 +1,17 @@
+[package]
+authors = ["Sora Tonami <ms0503@outlook.com>"]
+edition = "2021"
+name = "librobof303d"
+readme = "../README.md"
+version = "0.1.0"
+
+[dependencies]
+cortex-m = { workspace = true }
+cortex-m-rt = { workspace = true }
+embedded-hal = { workspace = true }
+librobo-common = { path = "../librobo-common" }
+nb = { workspace = true }
+stm32f3xx-hal = { features = ["stm32f303xd"], workspace = true }
+
+[lib]
+name = "librobof303d"

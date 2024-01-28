@@ -1,20 +1,20 @@
-[package]
-authors = ["ms0503"]
-edition = "2021"
-readme = "README.md"
-name = "librobo"
-version = "0.1.0"
+[workspace]
+members = [
+    "librobo-common",
+    "librobof303d",
+    "librobof407"
+]
+resolver = "2"
 
-[dependencies]
+[workspace.dependencies]
 cortex-m = "0.7"
 cortex-m-rt = "0.7"
-embedded-hal = "1.0"
+either = { default-features = false, version = "1.9" }
+embedded-hal = "0.2"
 nb = "1"
-panic-halt = "0.2"
-stm32f4xx-hal = { features = ["stm32f407"], version = "0.20" }
-
-[lib]
-name = "librobo"
+rotary-encoder-hal = "0.5"
+stm32f3xx-hal = "0.10"
+stm32f4xx-hal = "0.20"
 
 [profile.release]
 codegen-units = 1

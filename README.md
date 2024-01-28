@@ -1,6 +1,13 @@
-# `librobo`
+# librobo
 
-`librobo`はSTM32F407xGTx向けのHALを各機構・部品向けに更に抽象化するライブラリです。
+## Variants
+
+- [librobof303d](librobof303d) for STM32F303*x*DT*x*
+- [librobof407](librobof407) for STM32F407*xx*T*x*
+
+## Description
+
+`librobo`はSTM32F303*x*DT*x*・STM32F407*xx*T*x*向けのHALを各機構・部品向けに更に抽象化するライブラリです。
 
 ## Dependencies
 
@@ -23,8 +30,8 @@ $ rustup target add thumbv7em-none-eabihf
 ## Contribution
 
 コントリビューション大歓迎です。[メカトロニクス研究部会](https://github.com/mecha-natori)
-の部員はもちろん、外部の方々もIssueやPull Requestなど送っていただいて構いません。
+の部員はもちろん、外部の方々も[Issue](https://github.com/mecha-natori/librobo/issues)や[Pull Request](https://github.com/mecha-natori/librobo/pulls)など送っていただいて構いません。
 
 ## Authors/Contributors
 
-- Sora Tonami(@ms0503) - 開発メンバー
+- Sora Tonami([@ms0503](https://github.com/ms0503)) - 開発メンバー
