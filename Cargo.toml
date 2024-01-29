@@ -12,6 +12,7 @@ cortex-m-rt = "0.7"
 either = { default-features = false, version = "1.9" }
 embedded-hal = "0.2"
 nb = "1"
+num-traits = { default-features = false, features = ["libm"], version = "0.2" }
 rotary-encoder-hal = "0.5"
 stm32f3xx-hal = "0.10"
 stm32f4xx-hal = "0.20"

@@ -8,4 +8,5 @@ version = "0.1.0"
 [dependencies]
 either = { workspace = true }
 embedded-hal = { workspace = true }
+num-traits = { workspace = true }
 rotary-encoder-hal = { workspace = true }

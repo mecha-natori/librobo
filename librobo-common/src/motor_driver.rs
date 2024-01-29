@@ -2,7 +2,7 @@ use alloc::boxed::Box;
 use core::error::Error;
 use embedded_hal::digital::v2::InputPin;
 
-pub trait IMotorDriver<A, B>
+pub trait MotorDriver<A, B>
 where
     A: InputPin,
     B: InputPin

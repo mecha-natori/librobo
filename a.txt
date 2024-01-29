@@ -1,5 +1,5 @@
 
-impl<A, B, D> MotorDriver<A, B, Tim1Ch1, D>
+impl<A, B, D> MDCytron<A, B, Tim1Ch1, D>
 where
     A: InputPin,
     B: InputPin,
@@ -21,7 +21,7 @@ where
     }
 }
 
-impl<A, B, D> IMotorDriver<A, B> for MotorDriver<A, B, Tim1Ch1, D>
+impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim1Ch1, D>
 where
     A: InputPin,
     B: InputPin,

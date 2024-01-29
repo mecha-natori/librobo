@@ -1,6 +1,6 @@
 use alloc::boxed::Box;
 use core::error::Error;
-use librobo_common::{encoder::Encoder, motor_driver::IMotorDriver};
+use librobo_common::{encoder::Encoder, motor_driver::MotorDriver};
 use stm32f3xx_hal::{
     hal::{
         digital::v2::{InputPin, OutputPin},
@@ -41,7 +41,7 @@ where
 }
 
 #[derive(Debug)]
-pub struct MotorDriver<A, B, T, D>
+pub struct MDCytron<A, B, T, D>
 where
     A: InputPin,
     B: InputPin,
@@ -53,7 +53,7 @@ where
     dir: Direction<D>
 }
 
-impl<A, B, D> MotorDriver<A, B, Tim1Ch1, D>
+impl<A, B, D> MDCytron<A, B, Tim1Ch1, D>
 where
     A: InputPin,
     B: InputPin,
@@ -75,7 +75,7 @@ where
     }
 }
 
-impl<A, B, D> IMotorDriver<A, B> for MotorDriver<A, B, Tim1Ch1, D>
+impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim1Ch1, D>
 where
     A: InputPin,
     B: InputPin,
@@ -107,7 +107,7 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B, Tim1Ch2, D>
+impl<A, B, D> MDCytron<A, B, Tim1Ch2, D>
 where
     A: InputPin,
     B: InputPin,
@@ -129,7 +129,7 @@ where
     }
 }
 
-impl<A, B, D> IMotorDriver<A, B> for MotorDriver<A, B, Tim1Ch2, D>
+impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim1Ch2, D>
 where
     A: InputPin,
     B: InputPin,
@@ -161,7 +161,7 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B, Tim1Ch3, D>
+impl<A, B, D> MDCytron<A, B, Tim1Ch3, D>
 where
     A: InputPin,
     B: InputPin,
@@ -183,7 +183,7 @@ where
     }
 }
 
-impl<A, B, D> IMotorDriver<A, B> for MotorDriver<A, B, Tim1Ch3, D>
+impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim1Ch3, D>
 where
     A: InputPin,
     B: InputPin,
@@ -215,7 +215,7 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B, Tim1Ch4, D>
+impl<A, B, D> MDCytron<A, B, Tim1Ch4, D>
 where
     A: InputPin,
     B: InputPin,
@@ -237,7 +237,7 @@ where
     }
 }
 
-impl<A, B, D> IMotorDriver<A, B> for MotorDriver<A, B, Tim1Ch4, D>
+impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim1Ch4, D>
 where
     A: InputPin,
     B: InputPin,
@@ -269,7 +269,7 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B, Tim2Ch1, D>
+impl<A, B, D> MDCytron<A, B, Tim2Ch1, D>
 where
     A: InputPin,
     B: InputPin,
@@ -291,7 +291,7 @@ where
     }
 }
 
-impl<A, B, D> IMotorDriver<A, B> for MotorDriver<A, B, Tim2Ch1, D>
+impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim2Ch1, D>
 where
     A: InputPin,
     B: InputPin,
@@ -323,7 +323,7 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B, Tim2Ch2, D>
+impl<A, B, D> MDCytron<A, B, Tim2Ch2, D>
 where
     A: InputPin,
     B: InputPin,
@@ -345,7 +345,7 @@ where
     }
 }
 
-impl<A, B, D> IMotorDriver<A, B> for MotorDriver<A, B, Tim2Ch2, D>
+impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim2Ch2, D>
 where
     A: InputPin,
     B: InputPin,
@@ -377,7 +377,7 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B, Tim2Ch3, D>
+impl<A, B, D> MDCytron<A, B, Tim2Ch3, D>
 where
     A: InputPin,
     B: InputPin,
@@ -399,7 +399,7 @@ where
     }
 }
 
-impl<A, B, D> IMotorDriver<A, B> for MotorDriver<A, B, Tim2Ch3, D>
+impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim2Ch3, D>
 where
     A: InputPin,
     B: InputPin,
@@ -431,7 +431,7 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B, Tim2Ch4, D>
+impl<A, B, D> MDCytron<A, B, Tim2Ch4, D>
 where
     A: InputPin,
     B: InputPin,
@@ -453,7 +453,7 @@ where
     }
 }
 
-impl<A, B, D> IMotorDriver<A, B> for MotorDriver<A, B, Tim2Ch4, D>
+impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim2Ch4, D>
 where
     A: InputPin,
     B: InputPin,
@@ -485,7 +485,7 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B, Tim3Ch1, D>
+impl<A, B, D> MDCytron<A, B, Tim3Ch1, D>
 where
     A: InputPin,
     B: InputPin,
@@ -507,7 +507,7 @@ where
     }
 }
 
-impl<A, B, D> IMotorDriver<A, B> for MotorDriver<A, B, Tim3Ch1, D>
+impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim3Ch1, D>
 where
     A: InputPin,
     B: InputPin,
@@ -539,7 +539,7 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B, Tim3Ch2, D>
+impl<A, B, D> MDCytron<A, B, Tim3Ch2, D>
 where
     A: InputPin,
     B: InputPin,
@@ -561,7 +561,7 @@ where
     }
 }
 
-impl<A, B, D> IMotorDriver<A, B> for MotorDriver<A, B, Tim3Ch2, D>
+impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim3Ch2, D>
 where
     A: InputPin,
     B: InputPin,
@@ -593,7 +593,7 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B, Tim3Ch3, D>
+impl<A, B, D> MDCytron<A, B, Tim3Ch3, D>
 where
     A: InputPin,
     B: InputPin,
@@ -615,7 +615,7 @@ where
     }
 }
 
-impl<A, B, D> IMotorDriver<A, B> for MotorDriver<A, B, Tim3Ch3, D>
+impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim3Ch3, D>
 where
     A: InputPin,
     B: InputPin,
@@ -647,7 +647,7 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B, Tim3Ch4, D>
+impl<A, B, D> MDCytron<A, B, Tim3Ch4, D>
 where
     A: InputPin,
     B: InputPin,
@@ -669,7 +669,7 @@ where
     }
 }
 
-impl<A, B, D> IMotorDriver<A, B> for MotorDriver<A, B, Tim3Ch4, D>
+impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim3Ch4, D>
 where
     A: InputPin,
     B: InputPin,
@@ -701,7 +701,7 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B, Tim4Ch1, D>
+impl<A, B, D> MDCytron<A, B, Tim4Ch1, D>
 where
     A: InputPin,
     B: InputPin,
@@ -723,7 +723,7 @@ where
     }
 }
 
-impl<A, B, D> IMotorDriver<A, B> for MotorDriver<A, B, Tim4Ch1, D>
+impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim4Ch1, D>
 where
     A: InputPin,
     B: InputPin,
@@ -755,7 +755,7 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B, Tim4Ch2, D>
+impl<A, B, D> MDCytron<A, B, Tim4Ch2, D>
 where
     A: InputPin,
     B: InputPin,
@@ -777,7 +777,7 @@ where
     }
 }
 
-impl<A, B, D> IMotorDriver<A, B> for MotorDriver<A, B, Tim4Ch2, D>
+impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim4Ch2, D>
 where
     A: InputPin,
     B: InputPin,
@@ -809,7 +809,7 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B, Tim4Ch3, D>
+impl<A, B, D> MDCytron<A, B, Tim4Ch3, D>
 where
     A: InputPin,
     B: InputPin,
@@ -831,7 +831,7 @@ where
     }
 }
 
-impl<A, B, D> IMotorDriver<A, B> for MotorDriver<A, B, Tim4Ch3, D>
+impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim4Ch3, D>
 where
     A: InputPin,
     B: InputPin,
@@ -863,7 +863,7 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B, Tim4Ch4, D>
+impl<A, B, D> MDCytron<A, B, Tim4Ch4, D>
 where
     A: InputPin,
     B: InputPin,
@@ -885,7 +885,7 @@ where
     }
 }
 
-impl<A, B, D> IMotorDriver<A, B> for MotorDriver<A, B, Tim4Ch4, D>
+impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim4Ch4, D>
 where
     A: InputPin,
     B: InputPin,
@@ -917,7 +917,7 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B, Tim8Ch1, D>
+impl<A, B, D> MDCytron<A, B, Tim8Ch1, D>
 where
     A: InputPin,
     B: InputPin,
@@ -939,7 +939,7 @@ where
     }
 }
 
-impl<A, B, D> IMotorDriver<A, B> for MotorDriver<A, B, Tim8Ch1, D>
+impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim8Ch1, D>
 where
     A: InputPin,
     B: InputPin,
@@ -971,7 +971,7 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B, Tim8Ch2, D>
+impl<A, B, D> MDCytron<A, B, Tim8Ch2, D>
 where
     A: InputPin,
     B: InputPin,
@@ -993,7 +993,7 @@ where
     }
 }
 
-impl<A, B, D> IMotorDriver<A, B> for MotorDriver<A, B, Tim8Ch2, D>
+impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim8Ch2, D>
 where
     A: InputPin,
     B: InputPin,
@@ -1025,7 +1025,7 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B, Tim8Ch3, D>
+impl<A, B, D> MDCytron<A, B, Tim8Ch3, D>
 where
     A: InputPin,
     B: InputPin,
@@ -1047,7 +1047,7 @@ where
     }
 }
 
-impl<A, B, D> IMotorDriver<A, B> for MotorDriver<A, B, Tim8Ch3, D>
+impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim8Ch3, D>
 where
     A: InputPin,
     B: InputPin,
@@ -1079,7 +1079,7 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B, Tim8Ch4, D>
+impl<A, B, D> MDCytron<A, B, Tim8Ch4, D>
 where
     A: InputPin,
     B: InputPin,
@@ -1101,7 +1101,7 @@ where
     }
 }
 
-impl<A, B, D> IMotorDriver<A, B> for MotorDriver<A, B, Tim8Ch4, D>
+impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim8Ch4, D>
 where
     A: InputPin,
     B: InputPin,
