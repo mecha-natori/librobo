@@ -4,6 +4,8 @@
 
 extern crate alloc;
 
+pub mod controller;
+
 pub mod encoder;
 
 pub mod motor_driver;

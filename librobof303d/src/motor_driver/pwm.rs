@@ -41,7 +41,7 @@ where
 }
 
 #[derive(Debug)]
-pub struct MDCytron<A, B, T, D>
+pub struct PwmMD<A, B, T, D>
 where
     A: InputPin,
     B: InputPin,
@@ -53,7 +53,7 @@ where
     dir: Direction<D>
 }
 
-impl<A, B, D> MDCytron<A, B, Tim1Ch1, D>
+impl<A, B, D> PwmMD<A, B, Tim1Ch1, D>
 where
     A: InputPin,
     B: InputPin,
@@ -75,14 +75,15 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim1Ch1, D>
+impl<A, B, D> MotorDriver<A, B> for PwmMD<A, B, Tim1Ch1, D>
 where
     A: InputPin,
     B: InputPin,
     D: OutputPin<Error = Box<dyn Error + 'static>>
 {
-    fn init(&mut self) {
+    fn init(&mut self) -> Result<(), Box<dyn Error + 'static>> {
         self.pwm.enable();
+        Ok(())
     }
 
     fn set_target(&mut self, speed: i32) -> Result<(), Box<dyn Error + 'static>> {
@@ -107,7 +108,7 @@ where
     }
 }
 
-impl<A, B, D> MDCytron<A, B, Tim1Ch2, D>
+impl<A, B, D> PwmMD<A, B, Tim1Ch2, D>
 where
     A: InputPin,
     B: InputPin,
@@ -129,14 +130,15 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim1Ch2, D>
+impl<A, B, D> MotorDriver<A, B> for PwmMD<A, B, Tim1Ch2, D>
 where
     A: InputPin,
     B: InputPin,
     D: OutputPin<Error = Box<dyn Error + 'static>>
 {
-    fn init(&mut self) {
+    fn init(&mut self) -> Result<(), Box<dyn Error + 'static>> {
         self.pwm.enable();
+        Ok(())
     }
 
     fn set_target(&mut self, speed: i32) -> Result<(), Box<dyn Error + 'static>> {
@@ -161,7 +163,7 @@ where
     }
 }
 
-impl<A, B, D> MDCytron<A, B, Tim1Ch3, D>
+impl<A, B, D> PwmMD<A, B, Tim1Ch3, D>
 where
     A: InputPin,
     B: InputPin,
@@ -183,14 +185,15 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim1Ch3, D>
+impl<A, B, D> MotorDriver<A, B> for PwmMD<A, B, Tim1Ch3, D>
 where
     A: InputPin,
     B: InputPin,
     D: OutputPin<Error = Box<dyn Error + 'static>>
 {
-    fn init(&mut self) {
+    fn init(&mut self) -> Result<(), Box<dyn Error + 'static>> {
         self.pwm.enable();
+        Ok(())
     }
 
     fn set_target(&mut self, speed: i32) -> Result<(), Box<dyn Error + 'static>> {
@@ -215,7 +218,7 @@ where
     }
 }
 
-impl<A, B, D> MDCytron<A, B, Tim1Ch4, D>
+impl<A, B, D> PwmMD<A, B, Tim1Ch4, D>
 where
     A: InputPin,
     B: InputPin,
@@ -237,14 +240,15 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim1Ch4, D>
+impl<A, B, D> MotorDriver<A, B> for PwmMD<A, B, Tim1Ch4, D>
 where
     A: InputPin,
     B: InputPin,
     D: OutputPin<Error = Box<dyn Error + 'static>>
 {
-    fn init(&mut self) {
+    fn init(&mut self) -> Result<(), Box<dyn Error + 'static>> {
         self.pwm.enable();
+        Ok(())
     }
 
     fn set_target(&mut self, speed: i32) -> Result<(), Box<dyn Error + 'static>> {
@@ -269,7 +273,7 @@ where
     }
 }
 
-impl<A, B, D> MDCytron<A, B, Tim2Ch1, D>
+impl<A, B, D> PwmMD<A, B, Tim2Ch1, D>
 where
     A: InputPin,
     B: InputPin,
@@ -291,14 +295,15 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim2Ch1, D>
+impl<A, B, D> MotorDriver<A, B> for PwmMD<A, B, Tim2Ch1, D>
 where
     A: InputPin,
     B: InputPin,
     D: OutputPin<Error = Box<dyn Error + 'static>>
 {
-    fn init(&mut self) {
+    fn init(&mut self) -> Result<(), Box<dyn Error + 'static>> {
         self.pwm.enable();
+        Ok(())
     }
 
     fn set_target(&mut self, speed: i32) -> Result<(), Box<dyn Error + 'static>> {
@@ -323,7 +328,7 @@ where
     }
 }
 
-impl<A, B, D> MDCytron<A, B, Tim2Ch2, D>
+impl<A, B, D> PwmMD<A, B, Tim2Ch2, D>
 where
     A: InputPin,
     B: InputPin,
@@ -345,14 +350,15 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim2Ch2, D>
+impl<A, B, D> MotorDriver<A, B> for PwmMD<A, B, Tim2Ch2, D>
 where
     A: InputPin,
     B: InputPin,
     D: OutputPin<Error = Box<dyn Error + 'static>>
 {
-    fn init(&mut self) {
+    fn init(&mut self) -> Result<(), Box<dyn Error + 'static>> {
         self.pwm.enable();
+        Ok(())
     }
 
     fn set_target(&mut self, speed: i32) -> Result<(), Box<dyn Error + 'static>> {
@@ -377,7 +383,7 @@ where
     }
 }
 
-impl<A, B, D> MDCytron<A, B, Tim2Ch3, D>
+impl<A, B, D> PwmMD<A, B, Tim2Ch3, D>
 where
     A: InputPin,
     B: InputPin,
@@ -399,14 +405,15 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim2Ch3, D>
+impl<A, B, D> MotorDriver<A, B> for PwmMD<A, B, Tim2Ch3, D>
 where
     A: InputPin,
     B: InputPin,
     D: OutputPin<Error = Box<dyn Error + 'static>>
 {
-    fn init(&mut self) {
+    fn init(&mut self) -> Result<(), Box<dyn Error + 'static>> {
         self.pwm.enable();
+        Ok(())
     }
 
     fn set_target(&mut self, speed: i32) -> Result<(), Box<dyn Error + 'static>> {
@@ -431,7 +438,7 @@ where
     }
 }
 
-impl<A, B, D> MDCytron<A, B, Tim2Ch4, D>
+impl<A, B, D> PwmMD<A, B, Tim2Ch4, D>
 where
     A: InputPin,
     B: InputPin,
@@ -453,14 +460,15 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim2Ch4, D>
+impl<A, B, D> MotorDriver<A, B> for PwmMD<A, B, Tim2Ch4, D>
 where
     A: InputPin,
     B: InputPin,
     D: OutputPin<Error = Box<dyn Error + 'static>>
 {
-    fn init(&mut self) {
+    fn init(&mut self) -> Result<(), Box<dyn Error + 'static>> {
         self.pwm.enable();
+        Ok(())
     }
 
     fn set_target(&mut self, speed: i32) -> Result<(), Box<dyn Error + 'static>> {
@@ -485,7 +493,7 @@ where
     }
 }
 
-impl<A, B, D> MDCytron<A, B, Tim3Ch1, D>
+impl<A, B, D> PwmMD<A, B, Tim3Ch1, D>
 where
     A: InputPin,
     B: InputPin,
@@ -507,14 +515,15 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim3Ch1, D>
+impl<A, B, D> MotorDriver<A, B> for PwmMD<A, B, Tim3Ch1, D>
 where
     A: InputPin,
     B: InputPin,
     D: OutputPin<Error = Box<dyn Error + 'static>>
 {
-    fn init(&mut self) {
+    fn init(&mut self) -> Result<(), Box<dyn Error + 'static>> {
         self.pwm.enable();
+        Ok(())
     }
 
     fn set_target(&mut self, speed: i32) -> Result<(), Box<dyn Error + 'static>> {
@@ -539,7 +548,7 @@ where
     }
 }
 
-impl<A, B, D> MDCytron<A, B, Tim3Ch2, D>
+impl<A, B, D> PwmMD<A, B, Tim3Ch2, D>
 where
     A: InputPin,
     B: InputPin,
@@ -561,14 +570,15 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim3Ch2, D>
+impl<A, B, D> MotorDriver<A, B> for PwmMD<A, B, Tim3Ch2, D>
 where
     A: InputPin,
     B: InputPin,
     D: OutputPin<Error = Box<dyn Error + 'static>>
 {
-    fn init(&mut self) {
+    fn init(&mut self) -> Result<(), Box<dyn Error + 'static>> {
         self.pwm.enable();
+        Ok(())
     }
 
     fn set_target(&mut self, speed: i32) -> Result<(), Box<dyn Error + 'static>> {
@@ -593,7 +603,7 @@ where
     }
 }
 
-impl<A, B, D> MDCytron<A, B, Tim3Ch3, D>
+impl<A, B, D> PwmMD<A, B, Tim3Ch3, D>
 where
     A: InputPin,
     B: InputPin,
@@ -615,14 +625,15 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim3Ch3, D>
+impl<A, B, D> MotorDriver<A, B> for PwmMD<A, B, Tim3Ch3, D>
 where
     A: InputPin,
     B: InputPin,
     D: OutputPin<Error = Box<dyn Error + 'static>>
 {
-    fn init(&mut self) {
+    fn init(&mut self) -> Result<(), Box<dyn Error + 'static>> {
         self.pwm.enable();
+        Ok(())
     }
 
     fn set_target(&mut self, speed: i32) -> Result<(), Box<dyn Error + 'static>> {
@@ -647,7 +658,7 @@ where
     }
 }
 
-impl<A, B, D> MDCytron<A, B, Tim3Ch4, D>
+impl<A, B, D> PwmMD<A, B, Tim3Ch4, D>
 where
     A: InputPin,
     B: InputPin,
@@ -669,14 +680,15 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim3Ch4, D>
+impl<A, B, D> MotorDriver<A, B> for PwmMD<A, B, Tim3Ch4, D>
 where
     A: InputPin,
     B: InputPin,
     D: OutputPin<Error = Box<dyn Error + 'static>>
 {
-    fn init(&mut self) {
+    fn init(&mut self) -> Result<(), Box<dyn Error + 'static>> {
         self.pwm.enable();
+        Ok(())
     }
 
     fn set_target(&mut self, speed: i32) -> Result<(), Box<dyn Error + 'static>> {
@@ -701,7 +713,7 @@ where
     }
 }
 
-impl<A, B, D> MDCytron<A, B, Tim4Ch1, D>
+impl<A, B, D> PwmMD<A, B, Tim4Ch1, D>
 where
     A: InputPin,
     B: InputPin,
@@ -723,14 +735,15 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim4Ch1, D>
+impl<A, B, D> MotorDriver<A, B> for PwmMD<A, B, Tim4Ch1, D>
 where
     A: InputPin,
     B: InputPin,
     D: OutputPin<Error = Box<dyn Error + 'static>>
 {
-    fn init(&mut self) {
+    fn init(&mut self) -> Result<(), Box<dyn Error + 'static>> {
         self.pwm.enable();
+        Ok(())
     }
 
     fn set_target(&mut self, speed: i32) -> Result<(), Box<dyn Error + 'static>> {
@@ -755,7 +768,7 @@ where
     }
 }
 
-impl<A, B, D> MDCytron<A, B, Tim4Ch2, D>
+impl<A, B, D> PwmMD<A, B, Tim4Ch2, D>
 where
     A: InputPin,
     B: InputPin,
@@ -777,14 +790,15 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim4Ch2, D>
+impl<A, B, D> MotorDriver<A, B> for PwmMD<A, B, Tim4Ch2, D>
 where
     A: InputPin,
     B: InputPin,
     D: OutputPin<Error = Box<dyn Error + 'static>>
 {
-    fn init(&mut self) {
+    fn init(&mut self) -> Result<(), Box<dyn Error + 'static>> {
         self.pwm.enable();
+        Ok(())
     }
 
     fn set_target(&mut self, speed: i32) -> Result<(), Box<dyn Error + 'static>> {
@@ -809,7 +823,7 @@ where
     }
 }
 
-impl<A, B, D> MDCytron<A, B, Tim4Ch3, D>
+impl<A, B, D> PwmMD<A, B, Tim4Ch3, D>
 where
     A: InputPin,
     B: InputPin,
@@ -831,14 +845,15 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim4Ch3, D>
+impl<A, B, D> MotorDriver<A, B> for PwmMD<A, B, Tim4Ch3, D>
 where
     A: InputPin,
     B: InputPin,
     D: OutputPin<Error = Box<dyn Error + 'static>>
 {
-    fn init(&mut self) {
+    fn init(&mut self) -> Result<(), Box<dyn Error + 'static>> {
         self.pwm.enable();
+        Ok(())
     }
 
     fn set_target(&mut self, speed: i32) -> Result<(), Box<dyn Error + 'static>> {
@@ -863,7 +878,7 @@ where
     }
 }
 
-impl<A, B, D> MDCytron<A, B, Tim4Ch4, D>
+impl<A, B, D> PwmMD<A, B, Tim4Ch4, D>
 where
     A: InputPin,
     B: InputPin,
@@ -885,14 +900,15 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim4Ch4, D>
+impl<A, B, D> MotorDriver<A, B> for PwmMD<A, B, Tim4Ch4, D>
 where
     A: InputPin,
     B: InputPin,
     D: OutputPin<Error = Box<dyn Error + 'static>>
 {
-    fn init(&mut self) {
+    fn init(&mut self) -> Result<(), Box<dyn Error + 'static>> {
         self.pwm.enable();
+        Ok(())
     }
 
     fn set_target(&mut self, speed: i32) -> Result<(), Box<dyn Error + 'static>> {
@@ -917,7 +933,7 @@ where
     }
 }
 
-impl<A, B, D> MDCytron<A, B, Tim8Ch1, D>
+impl<A, B, D> PwmMD<A, B, Tim8Ch1, D>
 where
     A: InputPin,
     B: InputPin,
@@ -939,14 +955,15 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim8Ch1, D>
+impl<A, B, D> MotorDriver<A, B> for PwmMD<A, B, Tim8Ch1, D>
 where
     A: InputPin,
     B: InputPin,
     D: OutputPin<Error = Box<dyn Error + 'static>>
 {
-    fn init(&mut self) {
+    fn init(&mut self) -> Result<(), Box<dyn Error + 'static>> {
         self.pwm.enable();
+        Ok(())
     }
 
     fn set_target(&mut self, speed: i32) -> Result<(), Box<dyn Error + 'static>> {
@@ -971,7 +988,7 @@ where
     }
 }
 
-impl<A, B, D> MDCytron<A, B, Tim8Ch2, D>
+impl<A, B, D> PwmMD<A, B, Tim8Ch2, D>
 where
     A: InputPin,
     B: InputPin,
@@ -993,14 +1010,15 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim8Ch2, D>
+impl<A, B, D> MotorDriver<A, B> for PwmMD<A, B, Tim8Ch2, D>
 where
     A: InputPin,
     B: InputPin,
     D: OutputPin<Error = Box<dyn Error + 'static>>
 {
-    fn init(&mut self) {
+    fn init(&mut self) -> Result<(), Box<dyn Error + 'static>> {
         self.pwm.enable();
+        Ok(())
     }
 
     fn set_target(&mut self, speed: i32) -> Result<(), Box<dyn Error + 'static>> {
@@ -1025,7 +1043,7 @@ where
     }
 }
 
-impl<A, B, D> MDCytron<A, B, Tim8Ch3, D>
+impl<A, B, D> PwmMD<A, B, Tim8Ch3, D>
 where
     A: InputPin,
     B: InputPin,
@@ -1047,14 +1065,15 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim8Ch3, D>
+impl<A, B, D> MotorDriver<A, B> for PwmMD<A, B, Tim8Ch3, D>
 where
     A: InputPin,
     B: InputPin,
     D: OutputPin<Error = Box<dyn Error + 'static>>
 {
-    fn init(&mut self) {
+    fn init(&mut self) -> Result<(), Box<dyn Error + 'static>> {
         self.pwm.enable();
+        Ok(())
     }
 
     fn set_target(&mut self, speed: i32) -> Result<(), Box<dyn Error + 'static>> {
@@ -1079,7 +1098,7 @@ where
     }
 }
 
-impl<A, B, D> MDCytron<A, B, Tim8Ch4, D>
+impl<A, B, D> PwmMD<A, B, Tim8Ch4, D>
 where
     A: InputPin,
     B: InputPin,
@@ -1101,14 +1120,15 @@ where
     }
 }
 
-impl<A, B, D> MotorDriver<A, B> for MDCytron<A, B, Tim8Ch4, D>
+impl<A, B, D> MotorDriver<A, B> for PwmMD<A, B, Tim8Ch4, D>
 where
     A: InputPin,
     B: InputPin,
     D: OutputPin<Error = Box<dyn Error + 'static>>
 {
-    fn init(&mut self) {
+    fn init(&mut self) -> Result<(), Box<dyn Error + 'static>> {
         self.pwm.enable();
+        Ok(())
     }
 
     fn set_target(&mut self, speed: i32) -> Result<(), Box<dyn Error + 'static>> {

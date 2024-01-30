@@ -6,6 +6,8 @@ use core::{
 
 pub mod crawler;
 
+pub mod quad_omni;
+
 #[derive(Clone, Debug)]
 pub struct UnsupportedError;
 
@@ -21,10 +23,25 @@ impl Error for UnsupportedError {
     }
 }
 
+#[derive(Clone, Debug)]
+pub struct InvalidInputError;
+
+impl Display for InvalidInputError {
+    fn fmt(&self, f: &mut Formatter<'_>) -> core::fmt::Result {
+        write!(f, "invalid stick input")
+    }
+}
+
+impl Error for InvalidInputError {
+    fn source(&self) -> Option<&(dyn Error + 'static)> {
+        None
+    }
+}
+
 pub trait Steering {
     fn init(&mut self) {}
     fn update(&mut self, index: usize, speed: i32) -> Result<(), Box<dyn Error + 'static>>;
-    fn polar(&mut self, r: f32, theta: (f32, f32)) -> Result<(), Box<dyn Error + 'static>>;
+    fn polar(&mut self, r: (f32, f32), theta: (f32, f32)) -> Result<(), Box<dyn Error + 'static>>;
     fn forward(&mut self, speed: i32) -> Result<(), Box<dyn Error + 'static>>;
     fn backward(&mut self, speed: i32) -> Result<(), Box<dyn Error + 'static>>;
     fn left(&mut self, _speed: i32) -> Result<(), Box<dyn Error + 'static>> {
