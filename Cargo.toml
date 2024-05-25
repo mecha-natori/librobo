@@ -1,21 +1,16 @@
 [workspace]
+default-members = [
+    "librobo"
+]
 members = [
-    "librobo-common",
-    "librobof303d",
-    "librobof407"
+    "librobo",
+    "librobo-nostd"
 ]
 resolver = "2"
 
 [workspace.dependencies]
-cortex-m = "0.7"
-cortex-m-rt = "0.7"
-either = { default-features = false, version = "1.9" }
-embedded-hal = "0.2"
-nb = "1"
+heapless = "0.8"
 num-traits = { default-features = false, features = ["libm"], version = "0.2" }
-rotary-encoder-hal = "0.5"
-stm32f3xx-hal = "0.10"
-stm32f4xx-hal = "0.20"
 
 [profile.release]
 codegen-units = 1
