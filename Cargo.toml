@@ -8,10 +8,6 @@ members = [
 ]
 resolver = "2"
 
-[workspace.dependencies]
-heapless = "0.8"
-num-traits = { default-features = false, features = ["libm"], version = "0.2" }
-
 [profile.release]
 codegen-units = 1
 debug = true

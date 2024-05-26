@@ -11,14 +11,17 @@
 ビルドするには以下のものが必要となります。
 
 - Rust 1.31、1.30-beta、nightly-2018-09-13、もしくはそれ以上に新しいツールチェイン
-- `cargo generate`サブコマンド([インストール方法(英語)](https://github.com/ashleygwilliams/cargo-generate#installation)
+- `cargo generate`サブコマンド
+  下記のコマンドでインストール可能。
+  ``` console
+  $ cargo install cargo-generate
+  ```
   参照)
 - `rust-std`コンポーネント(コンパイル済み`core`クレート)  
   下記のコマンドでインストール可能。
-
-``` console
-$ rustup target add <TARGET_TRIPLE>
-```
+  ``` console
+  $ rustup target add <TARGET_TRIPLE>
+  ```
 
 ## License
 このライブラリは[MIT License](LICENSE.md)の下で頒布されます。

@@ -1,3 +1,6 @@
+[dependencies]
+num = "0.4"
+
 [package]
 authors = [
     "Sora Tonami <ms0503@outlook.com>"
