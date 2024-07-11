@@ -1,8 +1,17 @@
 //! コントローラー入力補助モジュール。
 
-use num::{Bounded, Complex, Float, Integer, Num, NumCast, Signed, ToPrimitive, Unsigned};
-
 use crate::math::Cartesian;
+use num::Bounded;
+use num::Complex;
+use num::Float;
+use num::Integer;
+use num::Num;
+use num::NumCast;
+use num::Signed;
+use num::ToPrimitive;
+use num::Unsigned;
+
+mod ffi;
 
 /// 左右スティック。
 #[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
