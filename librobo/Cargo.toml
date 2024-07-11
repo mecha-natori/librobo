@@ -1,6 +1,19 @@
 [dependencies]
 num = "0.4"
 
+[features]
+bind-c = []
+default = [
+    "bind-c"
+]
+
+[lib]
+crate-type = [
+    "cdylib",
+    "rlib",
+    "staticlib"
+]
+
 [package]
 authors = [
     "Sora Tonami <ms0503@outlook.com>"
