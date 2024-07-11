@@ -7,4 +7,7 @@
 #![warn(missing_docs, rustdoc::missing_crate_level_docs)]
 
 pub mod controller;
+
+pub mod encoder;
+
 pub mod math;
