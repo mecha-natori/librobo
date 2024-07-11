@@ -1,6 +1,5 @@
 //! コントローラー入力補助モジュール。
 
-use crate::math::Cartesian;
 use num::Bounded;
 use num::Complex;
 use num::Float;
@@ -10,6 +9,8 @@ use num::NumCast;
 use num::Signed;
 use num::ToPrimitive;
 use num::Unsigned;
+
+use crate::math::Cartesian;
 
 mod ffi;
 
