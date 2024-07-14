@@ -14,6 +14,7 @@ crate-type = [
     "rlib",
     "staticlib"
 ]
+name = "robo"
 
 [package]
 authors = [
