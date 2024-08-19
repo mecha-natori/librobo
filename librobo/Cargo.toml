@@ -1,14 +1,29 @@
 [dependencies]
+librobo-macro = { path = "../librobo-macro" }
 log = { default-features = false, version = "0.4" }
 num = "0.4"
 
 [features]
 bind-c = []
+controller = [
+    "librobo-macro/controller"
+]
 default = [
     "controller",
-    "encoder"
+    "encoder",
+    "steering"
 ]
 encoder = []
+steering = []
+steering-crawler = [
+    "steering"
+]
+steering-quad-mechanum = [
+    "steering"
+]
+steering-quad-omni = [
+    "steering"
+]
 
 [lib]
 crate-type = [

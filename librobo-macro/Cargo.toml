@@ -1,0 +1,19 @@
+[dependencies]
+quote = "1"
+syn = { features = ["extra-traits"], version = "2" }
+
+[features]
+controller = []
+
+[lib]
+name = "robo_macro"
+proc-macro = true
+
+[package]
+authors = [
+    "Sora Tonami <ms0503@outlook.com>"
+]
+edition = "2021"
+name = "librobo-macro"
+readme = "../README.md"
+version = "0.1.0"

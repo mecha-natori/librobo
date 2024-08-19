@@ -1,5 +1,6 @@
 [dependencies]
 heapless = "0.8"
+librobo-nostd-macro = { path = "../librobo-nostd-macro" }
 log = { default-features = false, version = "0.4" }
 num = { default-features = false, features = ["libm"], version = "0.4" }
 
@@ -10,9 +11,20 @@ controller = [
 ]
 default = [
     "controller",
-    "encoder"
+    "encoder",
+    "steering"
 ]
 encoder = []
+steering = []
+steering-crawler = [
+    "steering"
+]
+steering-quad-mechanum = [
+    "steering"
+]
+steering-quad-omni = [
+    "steering"
+]
 
 [lib]
 crate-type = [
@@ -20,7 +32,7 @@ crate-type = [
     "rlib",
     "staticlib"
 ]
-name = "robo"
+name = "robo_nostd"
 
 [package]
 authors = [
