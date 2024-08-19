@@ -1,44 +1,37 @@
-//! ロータリーエンコーダー補助モジュール。
+//! ロータリーエンコーダー補助モジュール
+#![cfg(feature = "encoder")]
 
 mod ffi;
 
-/// ロータリーエンコーダー。
+/// ロータリーエンコーダー
+#[derive(Clone, Copy, Debug, Default, Eq, Ord, PartialEq, PartialOrd)]
+#[repr(C)]
 pub struct Encoder {
-    cpr: u16,
-    count: i64
+    /// 分解能
+    pub ppr: u16,
+    /// カウンタ
+    pub count: i64
 }
 
-impl Encoder {
-    /// 分解能からインスタンスを作成する。
-    pub fn new(ppr: u16) -> Self {
-        Self {
-            cpr: ppr * 4,
-            count: 0
-        }
+/// カウンタを更新する。
+pub fn update(encoder: Encoder, delta: i64) -> Encoder {
+    Encoder {
+        count: encoder.count + delta,
+        ..encoder
     }
+}
 
-    /// カウンタを更新する。
-    pub fn update(&mut self, delta: i64) {
-        self.count += delta;
-    }
+/// 角度を60分法で取得する。
+pub fn get_degree(encoder: Encoder) -> f64 {
+    encoder.count as f64 / encoder.ppr as f64 / 4f64 * 360f64
+}
 
-    /// 生のカウンタを取得する。
-    pub fn get_count(&self) -> i64 {
-        self.count
-    }
+/// 角度を弧度法で取得する。
+pub fn get_radian(encoder: Encoder) -> f64 {
+    encoder.count as f64 / encoder.ppr as f64 / 4f64 * 2f64 * std::f64::consts::PI
+}
 
-    /// 角度を60分法で取得する。
-    pub fn get_degree(&self) -> f64 {
-        (self.count / self.cpr as i64) as f64 * 360f64
-    }
-
-    /// 角度を弧度法で取得する。
-    pub fn get_radian(&self) -> f64 {
-        (self.count / self.cpr as i64) as f64 * 2f64 * std::f64::consts::PI
-    }
-
-    /// 回転回数を取得する。
-    pub fn get_revolution(&self) -> i64 {
-        self.count / self.cpr as i64
-    }
+/// 回転回数を取得する。
+pub fn get_revolution(encoder: Encoder) -> i64 {
+    encoder.count / encoder.ppr as i64 / 4
 }

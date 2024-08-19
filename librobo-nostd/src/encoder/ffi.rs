@@ -7,38 +7,22 @@ mod c {
     use super::*;
 
     #[no_mangle]
-    extern "C" fn robo_create_encoder(ppr: u16) -> *const Encoder {
-        let encoder = Encoder::new(ppr);
-        &encoder
+    extern "C" fn robo_encoder_update(encoder: Encoder, delta: i64) -> Encoder {
+        update(encoder, delta)
     }
 
     #[no_mangle]
-    unsafe extern "C" fn robo_encoder_update(instance: *mut Encoder, delta: i64) {
-        let instance = &mut *instance;
-        instance.update(delta);
+    extern "C" fn robo_encoder_get_degree(encoder: Encoder) -> f64 {
+        get_degree(encoder)
     }
 
     #[no_mangle]
-    unsafe extern "C" fn robo_encoder_get_count(instance: *const Encoder) -> i64 {
-        let instance = &*instance;
-        instance.get_count()
+    extern "C" fn robo_encoder_get_radian(encoder: Encoder) -> f64 {
+        get_radian(encoder)
     }
 
     #[no_mangle]
-    unsafe extern "C" fn robo_encoder_get_degree(instance: *const Encoder) -> f64 {
-        let instance = &*instance;
-        instance.get_degree()
-    }
-
-    #[no_mangle]
-    unsafe extern "C" fn robo_encoder_get_radian(instance: *const Encoder) -> f64 {
-        let instance = &*instance;
-        instance.get_radian()
-    }
-
-    #[no_mangle]
-    unsafe extern "C" fn robo_encoder_get_revolution(instance: *const Encoder) -> i64 {
-        let instance = &*instance;
-        instance.get_revolution()
+    extern "C" fn robo_encoder_get_revolution(encoder: Encoder) -> i64 {
+        get_revolution(encoder)
     }
 }

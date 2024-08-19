@@ -1,6 +1,7 @@
-//! 数学補助モジュール。
+//! 数学補助モジュール
 
 use num::Complex;
+use num::Float;
 
 /// 直行座標系
 pub trait Cartesian<T> {
@@ -41,3 +42,26 @@ where
         self.im
     }
 }
+
+/// 浮動小数点数の近似等価演算
+pub trait FloatApproximately<T>
+where
+    T: Float
+{
+    /// 2つの浮動小数点数がおおよそ等しいかを返す。
+    fn approximately(&self, other: &Self) -> bool;
+}
+
+macro_rules! impl_float_approximately {
+    ($($t:ty),*) => {
+        $(
+            impl FloatApproximately<$t> for $t {
+                fn approximately(&self, other: &Self) -> bool {
+                    (self - other).abs() < Self::EPSILON
+                }
+            }
+        )*
+    };
+}
+
+impl_float_approximately!(f32, f64);

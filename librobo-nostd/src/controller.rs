@@ -1,7 +1,8 @@
-//! コントローラー入力補助モジュール。
+//! コントローラー入力補助モジュール
+#![cfg(feature = "controller")]
 
+use crate::math::Cartesian;
 use num::Bounded;
-use num::Complex;
 use num::Float;
 use num::Integer;
 use num::Num;
@@ -10,157 +11,71 @@ use num::Signed;
 use num::ToPrimitive;
 use num::Unsigned;
 
-use crate::math::Cartesian;
-
 mod ffi;
 
-/// 左右スティック。
-#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
-pub struct Sticks<T>
-where
-    T: Num + Signed
-{
-    /// 左スティック。
-    pub l: Complex<T>,
-    /// 右スティック。
-    pub r: Complex<T>,
-    /// 0-1か。
-    pub is_normalized: bool
+/// 左右スティック
+#[derive(Clone, Copy, Debug, Default, Eq, Ord, PartialEq, PartialOrd)]
+#[repr(C)]
+pub struct Sticks {
+    /// 左スティック
+    pub l: [i16; 2],
+    /// 右スティック
+    pub r: [i16; 2],
+    /// デッドゾーン \[%]
+    pub dead_zone: u8
 }
 
-impl<T> Sticks<T>
-where
-    T: Bounded + Copy + Num + PartialOrd + Signed + ToPrimitive
-{
-    /// 各スティックの生の値からインスタンスを作成する。
-    ///
-    /// 値の型の最大値を入力の最大値として計算します。
-    pub fn new(lx: T, ly: T, rx: T, ry: T, is_normalized: Option<bool>) -> Self {
-        Self {
-            l: Complex::new(lx, ly),
-            r: Complex::new(rx, ry),
-            is_normalized: is_normalized.unwrap_or(false)
-        }
-    }
+/// -1 - 1に正規化された左右スティック
+#[derive(Clone, Copy, Debug, Default, PartialEq, PartialOrd)]
+#[repr(C)]
+pub struct NormalizedSticks {
+    /// 左スティック
+    pub l: [f32; 2],
+    /// 右スティック
+    pub r: [f32; 2],
+    /// デッドゾーン \[%]
+    pub dead_zone: u8
+}
 
-    /// 各スティックの直交座標からインスタンスを作成する。
-    pub fn from_complex(l: Complex<T>, r: Complex<T>, is_normalized: Option<bool>) -> Self {
-        Self {
-            l,
-            r,
-            is_normalized: is_normalized.unwrap_or(false)
-        }
-    }
-
-    /// 各スティックの値を0-1へ変換する。
-    pub fn normalize<U>(&self) -> Sticks<U>
-    where
-        U: Bounded + Float + NumCast + Signed
-    {
-        if self.is_normalized {
-            return Sticks::new(
-                U::from(self.l.x()).unwrap_or(U::zero()),
-                U::from(self.l.y()).unwrap_or(U::zero()),
-                U::from(self.r.x()).unwrap_or(U::zero()),
-                U::from(self.r.y()).unwrap_or(U::zero()),
-                Some(true)
-            );
-        }
-        let lx = if self.l.x() < T::zero() {
-            self.l.x() + T::one()
-        } else {
-            self.l.x()
-        };
-        let ly = if self.l.y() < T::zero() {
-            self.l.y() + T::one()
-        } else {
-            self.l.y()
-        };
-        let rx = if self.r.x() < T::zero() {
-            self.r.x() + T::one()
-        } else {
-            self.r.x()
-        };
-        let ry = if self.r.y() < T::zero() {
-            self.r.y() + T::one()
-        } else {
-            self.r.y()
-        };
-        Sticks::new(
-            self._normalize(lx),
-            self._normalize(ly),
-            self._normalize(rx),
-            self._normalize(ry),
-            Some(true)
-        )
-    }
-
-    fn _normalize<U>(&self, value: T) -> U
-    where
-        U: Float + NumCast
-    {
-        U::from(value).unwrap_or(U::zero()) / U::from(T::max_value()).unwrap_or(U::one())
+/// 左右スティックの入力を正規化する。
+pub fn normalize_sticks(sticks: Sticks) -> NormalizedSticks {
+    let lx = sticks.l[0] as f32 / i16::MAX as f32;
+    let ly = sticks.l[1] as f32 / i16::MAX as f32;
+    let lr = f32::hypot(lx, ly);
+    let ltheta = f32::atan2(ly, lx);
+    let lr = (lr / (ltheta.sin() + ltheta.cos())).abs();
+    let lx = lr * ltheta.cos();
+    let ly = lr * ltheta.sin();
+    let rx = sticks.r[0] as f32 / i16::MAX as f32;
+    let ry = sticks.r[1] as f32 / i16::MAX as f32;
+    let rr = f32::hypot(rx, ry);
+    let rtheta = f32::atan2(ry, rx);
+    let rr = (rr / (rtheta.sin() + rtheta.cos())).abs();
+    let rx = rr * rtheta.cos();
+    let ry = rr * rtheta.sin();
+    NormalizedSticks {
+        l: [lx, ly],
+        r: [rx, ry],
+        dead_zone: sticks.dead_zone
     }
 }
 
-/// コントローラーユーティリティー。
-#[derive(Debug, Default)]
-pub struct Controller<T>
-where
-    T: Copy + ToPrimitive + Unsigned
-{
-    /// スティックのデッドゾーン。単位はパーセント。
-    dead_zone: T
+/// 左右スティック入力がそれぞれデッドゾーンに「入っているか」を判定する。
+///
+/// デッドゾーンは中心からの距離をパーセントで指定する。
+/// 戻り値は\[Left X, Left Y, Right X, Right Y]。
+pub fn is_sticks_in_dead_zone(sticks: Sticks) -> [bool; 4] {
+    is_normalized_sticks_in_dead_zone(normalize_sticks(sticks))
 }
 
-impl<T> Controller<T>
-where
-    T: Copy + ToPrimitive + Unsigned
-{
-    /// インスタンスを作成する。
-    pub fn new(dead_zone: T) -> Self {
-        Self { dead_zone }
-    }
-
-    /// スティック入力を処理する。
-    ///
-    /// 生のスティック入力をデッドゾーン判定にかけて0-1の値に変換します。
-    pub fn process_sticks<U, V>(&self, sticks: Sticks<U>) -> Sticks<V>
-    where
-        U: Bounded + Copy + Integer + Signed + ToPrimitive,
-        V: Bounded + Float + Signed
-    {
-        let sticks = sticks.normalize::<V>();
-        let lx = if self.is_in_deadzone::<U, V>(sticks.l.x()) {
-            V::zero()
-        } else {
-            sticks.l.x()
-        };
-        let ly = if self.is_in_deadzone::<U, V>(sticks.l.y()) {
-            V::zero()
-        } else {
-            sticks.l.y()
-        };
-        let rx = if self.is_in_deadzone::<U, V>(sticks.r.x()) {
-            V::zero()
-        } else {
-            sticks.r.x()
-        };
-        let ry = if self.is_in_deadzone::<U, V>(sticks.r.y()) {
-            V::zero()
-        } else {
-            sticks.r.y()
-        };
-        Sticks::new(lx, ly, rx, ry, Some(true))
-    }
-
-    fn is_in_deadzone<U, V>(&self, value: V) -> bool
-    where
-        U: Bounded + ToPrimitive,
-        V: Float + NumCast
-    {
-        V::from(value.abs()).unwrap_or(V::zero()) <=
-            V::from(self.dead_zone).unwrap_or(V::zero()) / V::from(100).unwrap_or(V::one()) *
-                V::from(U::max_value()).unwrap_or(V::zero())
-    }
+/// 正規化された左右スティック入力がそれぞれデッドゾーンに「入っているか」を判定する。
+///
+/// デッドゾーンは中心からの距離をパーセントで指定する。
+/// 戻り値は\[Left X, Left Y, Right X, Right Y]。
+pub fn is_normalized_sticks_in_dead_zone(sticks: NormalizedSticks) -> [bool; 4] {
+    let lx = sticks.l[0].abs() <= sticks.dead_zone as f32 / 100f32;
+    let ly = sticks.l[1].abs() <= sticks.dead_zone as f32 / 100f32;
+    let rx = sticks.r[0].abs() <= sticks.dead_zone as f32 / 100f32;
+    let ry = sticks.r[1].abs() <= sticks.dead_zone as f32 / 100f32;
+    [lx, ly, rx, ry]
 }

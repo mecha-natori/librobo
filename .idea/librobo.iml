@@ -2,13 +2,7 @@
 <module type="EMPTY_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/examples" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/librobof303d/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/librobof405/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/librobof407/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/librobo-common/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/librobo-nostd/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/librobo/librobo/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/librobo/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/librobo/librobo/target" />
       <excludeFolder url="file://$MODULE_DIR$/target" />

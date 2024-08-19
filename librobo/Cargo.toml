@@ -1,11 +1,14 @@
 [dependencies]
+log = { default-features = false, version = "0.4" }
 num = "0.4"
 
 [features]
 bind-c = []
 default = [
-    "bind-c"
+    "controller",
+    "encoder"
 ]
+encoder = []
 
 [lib]
 crate-type = [

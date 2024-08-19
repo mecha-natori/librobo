@@ -1,43 +1,47 @@
-#pragme once
+#pragma once
 
 #include <cstdint>
 
-extern "C" {
-    void *robo_create_encoder(std::uint16_t ppr);
-
-    void robo_encoder_update(void *instance, std::int64_t delta);
-
-    std::int64_t robo_encoder_get_count(void *instance);
-
-    double robo_encoder_get_degree(void *instance);
-
-    double robo_encoder_get_radian(void *instance);
-
-    std::int64_t robo_encoder_get_revolution(void *instance);
+/* *******
+ * Types *
+ *********/
+namespace Robo::Encoder {
+    struct Encoder {
+        std::uint16_t ppr;
+        std::int64_t count;
+    };
 }
 
+/* ***********
+ * Functions *
+ *************/
+extern "C" {
+    Robo::Encoder::Encoder robo_encoder_update(Robo::Encoder::Encoder encoder, std::int64_t delta);
+
+    double robo_encoder_get_degree(Robo::Encoder::Encoder encoder);
+
+    double robo_encoder_get_radian(Robo::Encoder::Encoder encoder);
+
+    std::int64_t robo_encoder_get_revolution(Robo::Encoder::Encoder encoder);
+}
+
+/* ********************
+ * Namespace Mappings *
+ **********************/
 namespace Robo::Encoder {
-    inline void *create(std::uint16_t ppr) {
-        return robo_create_encoder(ppr);
+    inline Encoder update(Encoder encoder, std::int64_t delta) {
+        return robo_encoder_update(encoder, delta);
     }
 
-    inline void update(void *instance, std::int64_t delta) {
-        return robo_encoder_update(instance, delta);
+    inline double get_degree(Encoder encoder) {
+        return robo_encoder_get_degree(encoder);
     }
 
-    inline std::int64_t get_count(void *instance) {
-        return robo_encoder_get_count(instance);
+    inline double get_radian(Encoder encoder) {
+        return robo_encoder_get_radian(encoder);
     }
 
-    inline double get_degree(void *instance) {
-        return robo_encoder_get_degree(instance);
-    }
-
-    inline double get_radian(void *instance) {
-        return robo_encoder_get_radian(instance);
-    }
-
-    inline std::int64_t get_revolution(void *instance) {
-        return robo_encoder_get_revolution(instance);
+    inline std::int64_t get_revolution(Encoder encoder) {
+        return robo_encoder_get_revolution(encoder);
     }
 }

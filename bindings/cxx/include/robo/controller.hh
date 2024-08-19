@@ -2,34 +2,47 @@
 
 #include <cstdint>
 
-extern "C" {
-    void *robo_create_sticks(std::int8_t lx, std::int8_t ly, std::int8_t rx, std::int8_t ry);
+/* *******
+ * Types *
+ *********/
+namespace Robo::Controller {
+    struct Sticks {
+        std::int16_t l[2];
+        std::int16_t r[2];
+        std::uint8_t dead_zone;
+    };
 
-    void *robo_sticks_normalize(void *instance);
-
-    void *robo_create_controller(std::uint8_t dead_zone);
-
-    void *robo_controller_process_sticks(void *instance, void *sticks);
+    struct NormalizedSticks {
+        float l[2];
+        float r[2];
+        std::uint8_t dead_zone;
+    };
 }
 
-namespace Robo {
-    namespace Sticks {
-        inline void *create(std::int8_t lx, std::int8_t ly, std::int8_t rx, std::int8_t ry) {
-            return robo_create_sticks(lx, ly, rx, ry);
-        }
+/* ***********
+ * Functions *
+ *************/
+extern "C" {
+    Robo::Controller::NormalizedSticks robo_controller_normalize_sticks(Robo::Controller::Sticks sticks);
 
-        inline void *normalize(void *instance) {
-            return robo_sticks_normalize(instance);
-        }
+    bool *robo_controller_is_sticks_in_dead_zone(Robo::Controller::Sticks sticks);
+
+    bool *robo_controller_is_normalized_sticks_in_dead_zone(Robo::Controller::NormalizedSticks sticks);
+}
+
+/* ********************
+ * Namespace Mappings *
+ **********************/
+namespace Robo::Controller {
+    inline NormalizedSticks normalize_sticks(Sticks sticks) {
+        return robo_controller_normalize_sticks(sticks);
     }
 
-    namespace Controller {
-        inline void *create(std::uint8_t dead_zone) {
-            return robo_create_controller(dead_zone);
-        }
+    inline bool *is_sticks_in_dead_zone(Sticks sticks) {
+        return robo_controller_is_sticks_in_dead_zone(sticks);
+    }
 
-        inline void *process_sticks(void *instance, void *sticks) {
-            return robo_controller_process_sticks(instance, sticks);
-        }
+    inline bool *is_normalized_sticks_in_dead_zone(NormalizedSticks sticks) {
+        return robo_controller_is_normalized_sticks_in_dead_zone(sticks);
     }
 }

@@ -1,12 +1,18 @@
 [dependencies]
 heapless = "0.8"
+log = { default-features = false, version = "0.4" }
 num = { default-features = false, features = ["libm"], version = "0.4" }
 
 [features]
 bind-c = []
-default = [
-    "bind-c"
+controller = [
+    "librobo-nostd-macro/controller"
 ]
+default = [
+    "controller",
+    "encoder"
+]
+encoder = []
 
 [lib]
 crate-type = [

@@ -1,15 +1,22 @@
-#pragme once
+#pragma once
 
 #include <stdint.h>
 
-void *robo_create_encoder(uint16_t ppr);
+/* *******
+ * Types *
+ *********/
+typedef struct {
+    uint16_t ppr;
+    int64_t count;
+} Encoder;
 
-void robo_encoder_update(void *instance, int64_t delta);
+/* ***********
+ * Functions *
+ *************/
+Encoder robo_encoder_update(Encoder encoder, int64_t delta);
 
-int64_t robo_encoder_get_count(void *instance);
+double robo_encoder_get_degree(Encoder encoder);
 
-double robo_encoder_get_degree(void *instance);
+double robo_encoder_get_radian(Encoder encoder);
 
-double robo_encoder_get_radian(void *instance);
-
-int64_t robo_encoder_get_revolution(void *instance);
+int64_t robo_encoder_get_revolution(Encoder encoder);
