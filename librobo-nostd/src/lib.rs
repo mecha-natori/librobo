@@ -12,4 +12,6 @@ pub mod encoder;
 
 pub mod math;
 
+pub mod servo;
+
 pub mod steering;

@@ -12,9 +12,11 @@ controller = [
 default = [
     "controller",
     "encoder",
+    "servo",
     "steering"
 ]
 encoder = []
+servo = []
 steering = []
 steering-crawler = [
     "steering"
