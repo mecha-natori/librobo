@@ -4,6 +4,7 @@ syn = { features = ["extra-traits"], version = "2" }
 
 [features]
 controller = []
+std = []
 
 [lib]
 name = "robo_macro"

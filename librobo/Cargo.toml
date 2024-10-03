@@ -1,4 +1,5 @@
 [dependencies]
+heapless = "0.8"
 librobo-macro = { path = "../librobo-macro" }
 log = { default-features = false, version = "0.4" }
 num = "0.4"
@@ -12,10 +13,17 @@ default = [
     "controller",
     "encoder",
     "servo",
-    "steering"
+    "std",
+    "steering",
+    "steering-crawler",
+    "steering-quad-mechanum",
+    "steering-quad-omni"
 ]
 encoder = []
 servo = []
+std = [
+    "librobo-macro/std"
+]
 steering = []
 steering-crawler = [
     "steering"

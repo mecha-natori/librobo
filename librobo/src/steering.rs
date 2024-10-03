@@ -3,6 +3,8 @@
 
 #[cfg(feature = "controller")]
 use crate::controller::NormalizedSticks;
+#[cfg(not(feature = "std"))]
+use heapless::Vec;
 use num::Complex;
 
 pub mod crawler;
@@ -38,6 +40,7 @@ pub struct Steering {
 }
 
 /// ステアリングインターフェース
+#[cfg(feature = "std")]
 pub trait ISteering {
     /// 速度を計算する。 \[rpm]
     fn calc_speed(
@@ -49,7 +52,19 @@ pub trait ISteering {
 }
 
 /// ステアリングインターフェース
-#[cfg(feature = "controller")]
+#[cfg(not(feature = "std"))]
+pub trait ISteering<const N: usize> {
+    /// 速度を計算する。 \[rpm]
+    fn calc_speed(
+        steering: Steering,
+        pid_data: Option<PIDData>,
+        l: Complex<f32>,
+        r: Complex<f32>
+    ) -> Vec<i16, N>;
+}
+
+/// ステアリングインターフェース
+#[cfg(all(feature = "controller", feature = "std"))]
 pub trait ISteeringFromSticks {
     /// 速度を計算する。 \[rpm]
     fn calc_speed(
@@ -57,6 +72,17 @@ pub trait ISteeringFromSticks {
         pid_data: Option<PIDData>,
         sticks: NormalizedSticks
     ) -> Vec<i16>;
+}
+
+/// ステアリングインターフェース
+#[cfg(all(feature = "controller", not(feature = "std")))]
+pub trait ISteeringFromSticks<const N: usize> {
+    /// 速度を計算する。 \[rpm]
+    fn calc_speed(
+        steering: Steering,
+        pid_data: Option<PIDData>,
+        sticks: NormalizedSticks
+    ) -> Vec<i16, N>;
 }
 
 pub use robo_macro::ISteeringFromSticks;

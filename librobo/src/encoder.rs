@@ -28,7 +28,7 @@ pub fn get_degree(encoder: Encoder) -> f64 {
 
 /// 角度を弧度法で取得する。
 pub fn get_radian(encoder: Encoder) -> f64 {
-    encoder.count as f64 / encoder.ppr as f64 / 4f64 * 2f64 * std::f64::consts::PI
+    encoder.count as f64 / encoder.ppr as f64 / 4f64 * 2f64 * core::f64::consts::PI
 }
 
 /// 回転回数を取得する。
