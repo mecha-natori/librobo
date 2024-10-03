@@ -64,6 +64,5 @@ unstable_features = true
 use_field_init_shorthand = true
 use_small_heuristics = "Default"
 use_try_shorthand = true
-version = "Two"
 where_single_line = false
 wrap_comments = true

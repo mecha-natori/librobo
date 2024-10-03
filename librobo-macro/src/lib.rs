@@ -1,8 +1,8 @@
 // noinspection RsUnresolvedPath
 use proc_macro::TokenStream;
 use quote::quote;
-use syn::DeriveInput;
 use syn::parse_macro_input;
+use syn::DeriveInput;
 
 #[cfg(feature = "controller")]
 #[proc_macro_derive(ISteeringFromSticks)]

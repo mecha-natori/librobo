@@ -9,10 +9,10 @@ use super::Steering;
 use crate::controller::NormalizedSticks;
 #[cfg(not(feature = "std"))]
 use heapless::Vec;
+use num::traits::FloatConst;
 use num::Complex;
 #[cfg(not(feature = "std"))]
 use num::Float;
-use num::traits::FloatConst;
 
 #[cfg(not(feature = "std"))]
 const N: usize = 4;
