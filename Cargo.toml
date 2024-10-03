@@ -4,6 +4,7 @@ default-members = [
 ]
 members = [
     "librobo",
+    "librobo-compat",
     "librobo-macro"
 ]
 resolver = "2"

@@ -6,6 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/librobo/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/librobo-macro/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/librobo-nostd-macro/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/librobo-compat/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />

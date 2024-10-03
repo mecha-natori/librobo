@@ -1,0 +1,20 @@
+[dependencies]
+esp32-ds4-driver = { git = "https://github.com/ms0503/ESP32-DS4-driver.git", optional = true }
+librobo = { path = "../librobo" }
+
+[lib]
+crate-type = [
+    "cdylib",
+    "rlib",
+    "staticlib"
+]
+name = "robo_compat"
+
+[package]
+authors = [
+    "Sora Tonami <ms0503@outlook.com>"
+]
+edition = "2021"
+name = "librobo-compat"
+readme = "../README.md"
+version = "0.1.0"
