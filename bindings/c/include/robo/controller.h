@@ -26,3 +26,7 @@ NormalizedSticks robo_controller_normalize_sticks(Sticks sticks);
 bool *robo_controller_is_sticks_in_dead_zone(Sticks sticks);
 
 bool *robo_controller_is_normalized_sticks_in_dead_zone(NormalizedSticks sticks);
+
+Sticks robo_controller_process_sticks_dead_zone(Sticks sticks);
+
+NormalizedSticks robo_controller_process_normalized_sticks_dead_zone(NormalizedSticks sticks);

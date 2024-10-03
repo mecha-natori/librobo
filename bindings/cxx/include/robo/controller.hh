@@ -28,6 +28,10 @@ extern "C" {
     bool *robo_controller_is_sticks_in_dead_zone(Robo::Controller::Sticks sticks);
 
     bool *robo_controller_is_normalized_sticks_in_dead_zone(Robo::Controller::NormalizedSticks sticks);
+
+    Robo::Controller::Sticks robo_controller_process_sticks_dead_zone(Robo::Controller::Sticks sticks);
+
+    Robo::Controller::NormalizedSticks robo_controller_process_normalized_sticks_dead_zone(Robo::Controller::NormalizedSticks sticks);
 }
 
 /* ********************
@@ -44,5 +48,13 @@ namespace Robo::Controller {
 
     inline bool *is_normalized_sticks_in_dead_zone(NormalizedSticks sticks) {
         return robo_controller_is_normalized_sticks_in_dead_zone(sticks);
+    }
+
+    inline Sticks process_sticks_dead_zone(Sticks sticks) {
+        return robo_controller_process_sticks_dead_zone(sticks);
+    }
+
+    inline NormalizedSticks process_normalized_sticks_dead_zone(NormalizedSticks sticks) {
+        return robo_controller_process_normalized_sticks_dead_zone(sticks);
     }
 }

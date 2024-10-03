@@ -22,4 +22,16 @@ mod c {
     ) -> *const bool {
         is_normalized_sticks_in_dead_zone(sticks).as_ptr()
     }
+
+    #[no_mangle]
+    extern "C" fn robo_controller_process_sticks_dead_zone(sticks: Sticks) -> Sticks {
+        process_sticks_dead_zone(sticks)
+    }
+
+    #[no_mangle]
+    extern "C" fn robo_controller_process_normalized_sticks_dead_zone(
+        sticks: NormalizedSticks
+    ) -> NormalizedSticks {
+        process_normalized_sticks_dead_zone(sticks)
+    }
 }

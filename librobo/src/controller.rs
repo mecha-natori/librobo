@@ -79,3 +79,71 @@ pub fn is_normalized_sticks_in_dead_zone(sticks: NormalizedSticks) -> [bool; 4] 
     let ry = sticks.r[1].abs() <= sticks.dead_zone as f32 / 100f32;
     [lx, ly, rx, ry]
 }
+
+/// 左右スティック入力のデッドゾーンを処理する。
+///
+/// 各スティック入力を各軸ごとに読み取り、デッドゾーン内であれば0に置き換える。
+pub fn process_sticks_dead_zone(sticks: Sticks) -> Sticks {
+    let is_in_dead_zone = is_sticks_in_dead_zone(sticks);
+    Sticks {
+        l: [
+            if is_in_dead_zone[0] {
+                0i16
+            } else {
+                sticks.l[0]
+            },
+            if is_in_dead_zone[1] {
+                0i16
+            } else {
+                sticks.l[1]
+            }
+        ],
+        r: [
+            if is_in_dead_zone[2] {
+                0i16
+            } else {
+                sticks.r[0]
+            },
+            if is_in_dead_zone[3] {
+                0i16
+            } else {
+                sticks.r[1]
+            }
+        ],
+        ..sticks
+    }
+}
+
+/// 正規化された左右スティック入力のデッドゾーンを処理する。
+///
+/// 各スティック入力を各軸ごとに読み取り、デッドゾーン内であれば0に置き換える。
+pub fn process_normalized_sticks_dead_zone(sticks: NormalizedSticks) -> NormalizedSticks {
+    let is_in_dead_zone = is_normalized_sticks_in_dead_zone(sticks);
+    NormalizedSticks {
+        l: [
+            if is_in_dead_zone[0] {
+                0f32
+            } else {
+                sticks.l[0]
+            },
+            if is_in_dead_zone[1] {
+                0f32
+            } else {
+                sticks.l[1]
+            }
+        ],
+        r: [
+            if is_in_dead_zone[2] {
+                0f32
+            } else {
+                sticks.r[0]
+            },
+            if is_in_dead_zone[3] {
+                0f32
+            } else {
+                sticks.r[1]
+            }
+        ],
+        ..sticks
+    }
+}
