@@ -87,4 +87,5 @@ pub trait ISteeringFromSticks<const N: usize> {
     ) -> Vec<i16, N>;
 }
 
+#[cfg(feature = "controller")]
 pub use robo_macro::ISteeringFromSticks;

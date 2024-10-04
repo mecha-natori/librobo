@@ -17,7 +17,8 @@ mod ffi;
 const N: usize = 2;
 
 /// クローラー
-#[derive(Clone, Copy, Debug, Eq, ISteeringFromSticks, Ord, PartialEq, PartialOrd)]
+#[cfg_attr(feature = "controller", derive(ISteeringFromSticks))]
+#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub struct Crawler;
 
 #[cfg(feature = "std")]
