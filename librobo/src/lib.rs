@@ -5,12 +5,16 @@
 #![cfg_attr(not(feature = "std"), no_std)]
 #![warn(missing_docs, rustdoc::missing_crate_level_docs)]
 
+#[cfg(feature = "controller")]
 pub mod controller;
 
+#[cfg(feature = "encoder")]
 pub mod encoder;
 
 pub mod math;
 
+#[cfg(feature = "servo")]
 pub mod servo;
 
+#[cfg(feature = "steering")]
 pub mod steering;

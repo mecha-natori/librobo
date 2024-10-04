@@ -1,5 +1,4 @@
 //! コントローラー入力補助モジュール
-#![cfg(feature = "controller")]
 
 use crate::math::Cartesian;
 use num::Bounded;
@@ -11,6 +10,7 @@ use num::Signed;
 use num::ToPrimitive;
 use num::Unsigned;
 
+#[cfg(feature = "bind-c")]
 mod ffi;
 
 /// 左右スティック

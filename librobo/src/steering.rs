@@ -1,5 +1,4 @@
 //! ステアリング補助モジュール
-#![cfg(feature = "steering")]
 
 #[cfg(feature = "controller")]
 use crate::controller::NormalizedSticks;
@@ -7,10 +6,13 @@ use crate::controller::NormalizedSticks;
 use heapless::Vec;
 use num::Complex;
 
+#[cfg(feature = "steering-crawler")]
 pub mod crawler;
 
+#[cfg(feature = "steering-quad-mechanum")]
 pub mod quad_mechanum;
 
+#[cfg(feature = "steering-quad-omni")]
 pub mod quad_omni;
 
 /// PID制御データ

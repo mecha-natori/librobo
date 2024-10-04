@@ -1,5 +1,3 @@
-#![allow(clippy::missing_safety_doc, missing_docs)]
-
 use super::*;
 
 #[cfg(feature = "bind-c")]

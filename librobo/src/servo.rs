@@ -1,6 +1,6 @@
 //! サーボ補助モジュール
-#![cfg(feature = "servo")]
 
+#[cfg(feature = "bind-c")]
 mod ffi;
 
 /// サーボの情報

@@ -1,5 +1,4 @@
 //! クローラーモジュール
-#![cfg(feature = "steering-crawler")]
 
 use super::ISteering;
 #[cfg(feature = "controller")]
@@ -10,6 +9,9 @@ use crate::controller::NormalizedSticks;
 #[cfg(not(feature = "std"))]
 use heapless::Vec;
 use num::Complex;
+
+#[cfg(feature = "bind-c")]
+mod ffi;
 
 #[cfg(not(feature = "std"))]
 const N: usize = 2;

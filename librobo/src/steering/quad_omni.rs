@@ -1,5 +1,4 @@
 //! 四輪オムニホイールモジュール
-#![cfg(feature = "steering-quad-omni")]
 
 use super::ISteering;
 #[cfg(feature = "controller")]
@@ -13,6 +12,9 @@ use num::traits::FloatConst;
 use num::Complex;
 #[cfg(not(feature = "std"))]
 use num::Float;
+
+#[cfg(feature = "bind-c")]
+mod ffi;
 
 #[cfg(not(feature = "std"))]
 const N: usize = 4;

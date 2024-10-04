@@ -1,6 +1,6 @@
 //! ロータリーエンコーダー補助モジュール
-#![cfg(feature = "encoder")]
 
+#[cfg(feature = "bind-c")]
 mod ffi;
 
 /// ロータリーエンコーダー
