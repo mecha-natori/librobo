@@ -2,9 +2,12 @@
 
 #[cfg(feature = "controller")]
 use crate::controller::NormalizedSticks;
+use core::error::Error;
+use core::fmt::Display;
 #[cfg(not(feature = "std"))]
 use heapless::Vec;
 use num::Complex;
+use std::fmt::Formatter;
 
 #[cfg(feature = "steering-crawler")]
 pub mod crawler;
@@ -36,6 +39,62 @@ pub struct PIDData {
     pub now_out: f32,
     /// 制御周期
     pub t: f32
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct MissingParameterError;
+
+impl Display for MissingParameterError {
+    fn fmt(&self, f: &mut Formatter<'_>) -> core::fmt::Result {
+        write!(f, "Missing some PID parameter(s).")
+    }
+}
+
+impl Error for MissingParameterError {}
+
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct PIDDataBuilder {
+    kp: Option<f32>,
+    ki: Option<f32>,
+    kd: Option<f32>,
+    t: Option<f32>
+}
+
+impl PIDDataBuilder {
+    pub fn build(self) -> Result<PIDData, MissingParameterError> {
+        if self.kp.is_none() || self.ki.is_none() || self.kd.is_none() || self.t.is_none() {
+            return Err(MissingParameterError);
+        }
+        Ok(PIDData {
+            kp: self.kp.unwrap(),
+            ki: self.ki.unwrap(),
+            kd: self.kd.unwrap(),
+            prev_e: 0f32,
+            prev_ie: 0f32,
+            now_out: 0f32,
+            t: self.t.unwrap()
+        })
+    }
+
+    pub fn kp(mut self, kp: f32) -> Self {
+        self.kp = Some(kp);
+        self
+    }
+
+    pub fn ki(mut self, ki: f32) -> Self {
+        self.ki = Some(ki);
+        self
+    }
+
+    pub fn kd(mut self, kd: f32) -> Self {
+        self.kd = Some(kd);
+        self
+    }
+
+    pub fn t(mut self, t: f32) -> Self {
+        self.t = Some(t);
+        self
+    }
 }
 
 /// ステアリングデータ
