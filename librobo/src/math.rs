@@ -9,8 +9,8 @@ pub trait Cartesian<T> {
     ///
     /// # Examples
     /// ```
-    /// use librobo::math::Cartesian;
     /// use num::Complex;
+    /// use robo::math::Cartesian;
     ///
     /// let c: Complex<i32> = Complex::new(10, 5);
     /// assert_eq!(c.x(), 10);
@@ -21,8 +21,8 @@ pub trait Cartesian<T> {
     ///
     /// # Examples
     /// ```
-    /// use librobo::math::Cartesian;
     /// use num::Complex;
+    /// use robo::math::Cartesian;
     ///
     /// let c: Complex<i32> = Complex::new(10, 5);
     /// assert_eq!(c.y(), 5);
