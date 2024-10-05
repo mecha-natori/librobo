@@ -41,6 +41,7 @@ pub struct PIDData {
     pub t: f32
 }
 
+/// パラメータ不足エラー
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct MissingParameterError;
 
@@ -52,6 +53,7 @@ impl Display for MissingParameterError {
 
 impl Error for MissingParameterError {}
 
+/// PID制御データのビルダー
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct PIDDataBuilder {
     kp: Option<f32>,
@@ -61,6 +63,10 @@ pub struct PIDDataBuilder {
 }
 
 impl PIDDataBuilder {
+    /// PID制御データを作成する。
+    ///
+    /// # Error
+    /// 制御周期の指定がされていない場合、[MissingParameterError]が返される。
     pub fn build(self) -> Result<PIDData, MissingParameterError> {
         if self.t.is_none() {
             return Err(MissingParameterError);
@@ -76,21 +82,25 @@ impl PIDDataBuilder {
         })
     }
 
+    /// Pゲインを設定する。
     pub fn kp(mut self, kp: f32) -> Self {
         self.kp = Some(kp);
         self
     }
 
+    /// Iゲインを設定する。
     pub fn ki(mut self, ki: f32) -> Self {
         self.ki = Some(ki);
         self
     }
 
+    /// Dゲインを設定する。
     pub fn kd(mut self, kd: f32) -> Self {
         self.kd = Some(kd);
         self
     }
 
+    /// 制御周期を設定する。 \[sec]
     pub fn t(mut self, t: f32) -> Self {
         self.t = Some(t);
         self
