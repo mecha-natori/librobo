@@ -1,8 +1,14 @@
 [dependencies]
 heapless = "0.8"
-librobo-macro = { path = "../librobo-macro" }
-log = { default-features = false, version = "0.4" }
 num = "0.4"
+
+[dependencies.librobo-macro]
+default-features = false
+path = "../librobo-macro"
+
+[dependencies.log]
+default-features = false
+version = "0.4"
 
 [features]
 bind-c = []

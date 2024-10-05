@@ -1,6 +1,9 @@
-[dependencies]
-esp32-ds4-driver = { git = "https://github.com/ms0503/ESP32-DS4-driver.git", optional = true }
-librobo = { path = "../librobo" }
+[dependencies.esp32-ds4-driver]
+git = "https://github.com/ms0503/ESP32-DS4-driver.git"
+optional = true
+
+[dependencies.librobo]
+path = "../librobo"
 
 [lib]
 crate-type = [

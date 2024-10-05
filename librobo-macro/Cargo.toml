@@ -1,6 +1,11 @@
 [dependencies]
 quote = "1"
-syn = { features = ["extra-traits"], version = "2" }
+
+[dependencies.syn]
+features = [
+    "extra-traits"
+]
+version = "2"
 
 [features]
 controller = []
