@@ -62,13 +62,13 @@ pub struct PIDDataBuilder {
 
 impl PIDDataBuilder {
     pub fn build(self) -> Result<PIDData, MissingParameterError> {
-        if self.kp.is_none() || self.ki.is_none() || self.kd.is_none() || self.t.is_none() {
+        if self.t.is_none() {
             return Err(MissingParameterError);
         }
         Ok(PIDData {
-            kp: self.kp.unwrap(),
-            ki: self.ki.unwrap(),
-            kd: self.kd.unwrap(),
+            kp: self.kp.unwrap_or(0f32),
+            ki: self.ki.unwrap_or(0f32),
+            kd: self.kd.unwrap_or(0f32),
             prev_e: 0f32,
             prev_ie: 0f32,
             now_out: 0f32,
