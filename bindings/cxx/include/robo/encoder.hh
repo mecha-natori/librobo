@@ -29,19 +29,19 @@ extern "C" {
  * Namespace Mappings *
  **********************/
 namespace Robo::Encoder {
-    inline Encoder update(Encoder encoder, std::int64_t delta) {
+    inline Encoder update(const Encoder encoder, const std::int64_t delta) {
         return robo_encoder_update(encoder, delta);
     }
 
-    inline double get_degree(Encoder encoder) {
+    inline double get_degree(const Encoder encoder) {
         return robo_encoder_get_degree(encoder);
     }
 
-    inline double get_radian(Encoder encoder) {
+    inline double get_radian(const Encoder encoder) {
         return robo_encoder_get_radian(encoder);
     }
 
-    inline std::int64_t get_revolution(Encoder encoder) {
+    inline std::int64_t get_revolution(const Encoder encoder) {
         return robo_encoder_get_revolution(encoder);
     }
 }

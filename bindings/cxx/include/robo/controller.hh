@@ -38,23 +38,23 @@ extern "C" {
  * Namespace Mappings *
  **********************/
 namespace Robo::Controller {
-    inline NormalizedSticks normalize_sticks(Sticks sticks) {
+    inline NormalizedSticks normalize_sticks(const Sticks sticks) {
         return robo_controller_normalize_sticks(sticks);
     }
 
-    inline bool *is_sticks_in_dead_zone(Sticks sticks) {
+    inline bool *is_sticks_in_dead_zone(const Sticks sticks) {
         return robo_controller_is_sticks_in_dead_zone(sticks);
     }
 
-    inline bool *is_normalized_sticks_in_dead_zone(NormalizedSticks sticks) {
+    inline bool *is_normalized_sticks_in_dead_zone(const NormalizedSticks sticks) {
         return robo_controller_is_normalized_sticks_in_dead_zone(sticks);
     }
 
-    inline Sticks process_sticks_dead_zone(Sticks sticks) {
+    inline Sticks process_sticks_dead_zone(const Sticks sticks) {
         return robo_controller_process_sticks_dead_zone(sticks);
     }
 
-    inline NormalizedSticks process_normalized_sticks_dead_zone(NormalizedSticks sticks) {
+    inline NormalizedSticks process_normalized_sticks_dead_zone(const NormalizedSticks sticks) {
         return robo_controller_process_normalized_sticks_dead_zone(sticks);
     }
 }

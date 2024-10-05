@@ -18,11 +18,11 @@ extern "C" {
  * Namespace Mappings *
  **********************/
 namespace Robo::Steering::Crawler {
-    inline std::int16_t *calc_speed(Steering steering, PIDData *pid_data, std::complex<float> l, std::complex<float> r) {
+    inline std::int16_t *calc_speed(const Steering steering, PIDData *const pid_data, const std::complex<float> l, const std::complex<float> r) {
         return robo_steering_crawler_calc_speed(steering, pid_data, l, r);
     }
 
-    inline std::int16_t *calc_speed_from_sticks(Steering steering, PIDData *pid_data, Controller::NormalizedSticks sticks) {
+    inline std::int16_t *calc_speed_from_sticks(const Steering steering, PIDData *const pid_data, const Controller::NormalizedSticks sticks) {
         return robo_steering_crawler_calc_speed_from_sticks(steering, pid_data, sticks);
     }
 }
