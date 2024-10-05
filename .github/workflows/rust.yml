@@ -16,7 +16,7 @@ jobs:
       - name: Build docs
         run: cargo doc --no-deps --verbose
       - name: Deploy
-        uses: actions/upload-page-artifact@v3
+        uses: actions/upload-pages-artifact@v3
         with:
           path: target/doc
   deploy-doc:
