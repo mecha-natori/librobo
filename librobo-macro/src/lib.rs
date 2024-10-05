@@ -15,7 +15,7 @@ pub fn derive_i_steering_from_sticks(input: TokenStream) -> TokenStream {
         impl ISteeringFromSticks for #ident {
             fn calc_speed(
                 steering: Steering,
-                pid_data: Option<PIDData>,
+                pid_data: Option<&mut Vec<PIDData>>,
                 sticks: NormalizedSticks
             ) -> Vec<i16> {
                 <Self as ISteering>::calc_speed(
@@ -32,7 +32,7 @@ pub fn derive_i_steering_from_sticks(input: TokenStream) -> TokenStream {
         impl ISteeringFromSticks<N> for #ident {
             fn calc_speed(
                 steering: Steering,
-                pid_data: Option<PIDData>,
+                pid_data: Option<&mut Vec<PIDData, N>>,
                 sticks: NormalizedSticks
             ) -> Vec<i16, N> {
                 <Self as ISteering<N>>::calc_speed(

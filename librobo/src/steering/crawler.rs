@@ -1,5 +1,6 @@
 //! クローラーモジュール
 
+use super::process_pid_data;
 use super::ISteering;
 #[cfg(feature = "controller")]
 use super::ISteeringFromSticks;
@@ -28,13 +29,19 @@ impl ISteering for Crawler {
     /// 戻り値は\[Right, Left]。
     fn calc_speed(
         steering: Steering,
-        pid_data: Option<PIDData>,
+        pid_data: Option<&mut Vec<PIDData>>,
         l: Complex<f32>,
         r: Complex<f32>
     ) -> Vec<i16> {
         let r = steering.max_speed as f32 * -r.im;
         let l = steering.max_speed as f32 * l.im;
-        [r as i16, l as i16].to_vec()
+        if let Some(mut pid_data) = pid_data {
+            let r = process_pid_data(&mut pid_data[0], r);
+            let l = process_pid_data(&mut pid_data[1], l);
+            [r as i16, l as i16].to_vec()
+        } else {
+            [r as i16, l as i16].to_vec()
+        }
     }
 }
 
@@ -45,12 +52,18 @@ impl ISteering<N> for Crawler {
     /// 戻り値は\[Right, Left]。
     fn calc_speed(
         steering: Steering,
-        pid_data: Option<PIDData>,
+        pid_data: Option<&mut Vec<PIDData, N>>,
         l: Complex<f32>,
         r: Complex<f32>
     ) -> Vec<i16, N> {
         let r = steering.max_speed as f32 * -r.im;
         let l = steering.max_speed as f32 * l.im;
-        Vec::from_slice(&[r as i16, l as i16]).unwrap()
+        if let Some(pid_data) = pid_data {
+            let r = process_pid_data(&mut pid_data[0], r);
+            let l = process_pid_data(&mut pid_data[1], l);
+            Vec::from_slice(&[r as i16, l as i16]).unwrap()
+        } else {
+            Vec::from_slice(&[r as i16, l as i16]).unwrap()
+        }
     }
 }
