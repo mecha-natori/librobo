@@ -1,4 +1,14 @@
-// noinspection RsUnresolvedPath
+//! libroboの手続き型マクロ群クレート。
+//!
+//! ```edition2021
+//! # use robo_macro::ISteeringFromSticks;
+//! #
+//! #[derive(ISteeringFromSticks)]
+//! # struct S;
+//! #
+//! # fn main() {}
+//! ```
+
 use proc_macro::TokenStream;
 use quote::quote;
 use syn::parse_macro_input;
@@ -6,7 +16,6 @@ use syn::DeriveInput;
 
 #[cfg(feature = "controller")]
 #[proc_macro_derive(ISteeringFromSticks)]
-// noinspection RsUnresolvedPath
 pub fn derive_i_steering_from_sticks(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let ident = input.ident;
