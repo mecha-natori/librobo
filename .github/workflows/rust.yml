@@ -15,6 +15,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build docs
         run: cargo doc --no-deps --verbose
+      - name: Copy static docs
+        run: cp -rv docs/* target/doc
       - name: Deploy
         uses: actions/upload-pages-artifact@v3
         with:
