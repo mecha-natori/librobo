@@ -1,21 +1,29 @@
-[dependencies]
-heapless = "0.8"
-num = "0.4"
+[dependencies.heapless]
+default-features = false
+version = "0.8"
 
 [dependencies.librobo-macro]
 default-features = false
 path = "../librobo-macro"
 
-[dependencies.log]
+[dependencies.num]
 default-features = false
 version = "0.4"
 
 [features]
-bind-c = []
-controller = [
-    "librobo-macro/controller"
+all = [
+    "bind-c",
+    "controller",
+    "encoder",
+    "num/libm",
+    "servo",
+    "steering",
+    "steering-crawler",
+    "steering-quad-mechanum",
+    "steering-quad-omni"
 ]
-default = [
+all-std = [
+    "bind-c",
     "controller",
     "encoder",
     "servo",
@@ -25,10 +33,18 @@ default = [
     "steering-quad-mechanum",
     "steering-quad-omni"
 ]
+bind-c = []
+controller = [
+    "librobo-macro/controller"
+]
+default = [
+    "num/libm"
+]
 encoder = []
 servo = []
 std = [
-    "librobo-macro/std"
+    "librobo-macro/std",
+    "num/std"
 ]
 steering = []
 steering-crawler = [
@@ -56,4 +72,4 @@ authors = [
 edition = "2021"
 name = "librobo"
 readme = "../README.md"
-version = "0.1.1"
+version = "0.2.0"
