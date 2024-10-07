@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build docs
-        run: cargo doc --no-deps --verbose
+        run: cargo doc --no-deps --all --verbose
       - name: Copy static docs
         run: cp -rv docs/* target/doc
       - name: Deploy
