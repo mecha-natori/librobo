@@ -1,21 +1,24 @@
-Param([switch] $r, [string] $t)
+Param([switch] $r, [switch] $s, [string] $t)
 
-Set-Location $PSCommandPath
+Set-Location $PSScriptRoot
 if(-not (Get-Command -Name cargo -ErrorAction SilentlyContinue)) {
     Write-Output "RustがインストールされていないかPATHが通されていません。"
     exit 1
 }
 $RELEASE = $r
+$FEATURE = "all"
 $TARGET_TRIPLE = "$t"
-$RELEASE_FLAG = ""
 $LIB_PATH = ""
-if($RELEASE) {
-    $RELEASE_FLAG = "--release"
-    $LIB_PATH = "target/$TARGET_TRIPLE$( $TARGET_TRIPLE -and "/" )release/librobo.a"
-} else {
-    $LIB_PATH = "target/$TARGET_TRIPLE$( $TARGET_TRIPLE -and "/" )debug/librobo.a"
+if($s) {
+    $FEATURE = "all-std"
 }
-cargo build "$RELEASE_FLAG"
+if($RELEASE) {
+    cargo build --no-default-features --features "$FEATURE" --release
+    $LIB_PATH = "target/$( $TARGET_TRIPLE ? "$TARGET_TRIPLE/" : [string]::Empty )release/librobo.a"
+} else {
+    cargo build --no-default-features --features "$FEATURE"
+    $LIB_PATH = "target/$( $TARGET_TRIPLE ? "$TARGET_TRIPLE/" : [string]::Empty )debug/librobo.a"
+}
 New-Item -Path bindings/c/lib -ItemType Directory -ErrorAction SilentlyContinue
 New-Item -Path bindings/cxx/lib -ItemType Directory -ErrorAction SilentlyContinue
 Copy-Item -Path "$LIB_PATH" -Destination bindings/c/lib/librobo.a -Force
