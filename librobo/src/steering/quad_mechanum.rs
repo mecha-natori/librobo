@@ -52,7 +52,7 @@ impl ISteering<N> for QuadMechanum {
     /// 戻り値は\[Front-right, Front-left, Rear-left, Rear-right]。
     fn calc_speed(
         steering: Steering,
-        pid_data: Option<&mut Vec<PIDData>>,
+        pid_data: Option<&mut Vec<PIDData, N>>,
         l: Complex<f32>,
         r: Complex<f32>
     ) -> Vec<i16, N> {
