@@ -6,11 +6,15 @@ if ! command -v cargo; then
     exit 1
 fi
 RELEASE=false
+FEATURE="all"
 TARGET_TRIPLE=""
-while getopts rt: OPT; do
+while getopts rst: OPT; do
     case "$OPT" in
         r)
             RELEASE=true
+            ;;
+        s)
+            FEATURE="all-std"
             ;;
         t)
             TARGET_TRIPLE=$OPTARG
@@ -19,15 +23,14 @@ while getopts rt: OPT; do
             ;;
     esac
 done
-RELEASE_FLAG=""
 LIB_PATH=""
 if $RELEASE; then
-    RELEASE_FLAG="--release"
+    cargo build --no-default-features --features "$FEATURE" --release
     LIB_PATH="target/$TARGET_TRIPLE${TARGET_TRIPLE:+/}release/librobo.a"
 else
+    cargo build --no-default-features --features "$FEATURE"
     LIB_PATH="target/$TARGET_TRIPLE${TARGET_TRIPLE:+/}debug/librobo.a"
 fi
-cargo build "$RELEASE_FLAG"
 install -dm755 bindings/c/lib
 install -dm755 bindings/cxx/lib
 install -Dm644 "$LIB_PATH" bindings/c/lib/librobo.a
