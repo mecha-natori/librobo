@@ -4,10 +4,10 @@
 use crate::controller::NormalizedSticks;
 use core::error::Error;
 use core::fmt::Display;
+use core::fmt::Formatter;
 #[cfg(not(feature = "std"))]
 use heapless::Vec;
 use num::Complex;
-use std::fmt::Formatter;
 
 #[cfg(feature = "steering-crawler")]
 pub mod crawler;

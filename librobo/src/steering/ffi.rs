@@ -1,9 +1,10 @@
+use super::*;
 #[cfg(not(feature = "std"))]
 use heapless::Vec;
 
 #[cfg(feature = "bind-c")]
 mod c {
-    use crate::steering::process_pid_data;
+    use super::*;
 
     #[no_mangle]
     unsafe extern "C" fn robo_steering_process_pid_data(
