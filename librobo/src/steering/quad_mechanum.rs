@@ -6,9 +6,9 @@ use super::ISteeringFromSticks;
 use super::PIDData;
 use super::Steering;
 use crate::controller::NormalizedSticks;
-#[cfg(all(feature = "alloc", not(feature = "std")))]
+#[cfg(feature = "alloc")]
 use alloc::vec::Vec;
-#[cfg(not(any(feature = "alloc", feature = "std")))]
+#[cfg(feature = "heapless")]
 use heapless::Vec;
 use num::traits::FloatConst;
 use num::Complex;
@@ -18,7 +18,7 @@ use num::Float;
 #[cfg(feature = "bind-c")]
 mod ffi;
 
-#[cfg(not(any(feature = "alloc", feature = "std")))]
+#[cfg(feature = "heapless")]
 const N: usize = 4;
 
 /// 四輪メカナムホイール
@@ -47,7 +47,7 @@ impl ISteering for QuadMechanum {
     }
 }
 
-#[cfg(not(any(feature = "alloc", feature = "std")))]
+#[cfg(feature = "heapless")]
 impl ISteering<N> for QuadMechanum {
     /// 速度を計算する。 \[rpm]
     ///

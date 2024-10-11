@@ -6,7 +6,7 @@
 #![cfg_attr(not(feature = "std"), no_std)]
 #![warn(missing_docs, rustdoc::missing_crate_level_docs)]
 
-#[cfg(all(feature = "alloc", not(feature = "std")))]
+#[cfg(feature = "alloc")]
 extern crate alloc;
 
 #[cfg(feature = "controller")]

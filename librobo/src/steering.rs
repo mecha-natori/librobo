@@ -2,12 +2,12 @@
 
 #[cfg(feature = "controller")]
 use crate::controller::NormalizedSticks;
-#[cfg(all(feature = "alloc", not(feature = "std")))]
+#[cfg(feature = "alloc")]
 use alloc::vec::Vec;
 use core::error::Error;
 use core::fmt::Display;
 use core::fmt::Formatter;
-#[cfg(not(any(feature = "alloc", feature = "std")))]
+#[cfg(feature = "heapless")]
 use heapless::Vec;
 use num::Complex;
 
@@ -130,7 +130,7 @@ pub trait ISteering {
 }
 
 /// ステアリングインターフェース
-#[cfg(not(any(feature = "alloc", feature = "std")))]
+#[cfg(feature = "heapless")]
 pub trait ISteering<const N: usize> {
     /// 速度を計算する。 \[rpm]
     fn calc_speed(
@@ -153,7 +153,7 @@ pub trait ISteeringFromSticks {
 }
 
 /// ステアリングインターフェース
-#[cfg(all(feature = "controller", not(any(feature = "alloc", feature = "std"))))]
+#[cfg(all(feature = "controller", feature = "heapless"))]
 pub trait ISteeringFromSticks<const N: usize> {
     /// 速度を計算する。 \[rpm]
     fn calc_speed(

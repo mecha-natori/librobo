@@ -1,5 +1,6 @@
 [dependencies.heapless]
 default-features = false
+optional = true
 version = "0.8"
 
 [dependencies.librobo-macro]
@@ -14,6 +15,7 @@ version = "0.4"
 all = [
     "bind-c",
     "controller",
+    "dep:heapless",
     "encoder",
     "num/libm",
     "servo",
@@ -53,6 +55,7 @@ controller = [
     "librobo-macro/controller"
 ]
 default = [
+    "dep:heapless",
     "num/libm"
 ]
 encoder = []
