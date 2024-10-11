@@ -2,10 +2,12 @@
 
 #[cfg(feature = "controller")]
 use crate::controller::NormalizedSticks;
+#[cfg(all(feature = "alloc", not(feature = "std")))]
+use alloc::vec::Vec;
 use core::error::Error;
 use core::fmt::Display;
 use core::fmt::Formatter;
-#[cfg(not(feature = "std"))]
+#[cfg(not(any(feature = "alloc", feature = "std")))]
 use heapless::Vec;
 use num::Complex;
 
@@ -116,7 +118,7 @@ pub struct Steering {
 }
 
 /// ステアリングインターフェース
-#[cfg(feature = "std")]
+#[cfg(any(feature = "alloc", feature = "std"))]
 pub trait ISteering {
     /// 速度を計算する。 \[rpm]
     fn calc_speed(
@@ -128,7 +130,7 @@ pub trait ISteering {
 }
 
 /// ステアリングインターフェース
-#[cfg(not(feature = "std"))]
+#[cfg(not(any(feature = "alloc", feature = "std")))]
 pub trait ISteering<const N: usize> {
     /// 速度を計算する。 \[rpm]
     fn calc_speed(
@@ -140,7 +142,7 @@ pub trait ISteering<const N: usize> {
 }
 
 /// ステアリングインターフェース
-#[cfg(all(feature = "controller", feature = "std"))]
+#[cfg(all(any(feature = "alloc", feature = "std"), feature = "controller"))]
 pub trait ISteeringFromSticks {
     /// 速度を計算する。 \[rpm]
     fn calc_speed(
@@ -151,7 +153,7 @@ pub trait ISteeringFromSticks {
 }
 
 /// ステアリングインターフェース
-#[cfg(all(feature = "controller", not(feature = "std")))]
+#[cfg(all(feature = "controller", not(any(feature = "alloc", feature = "std"))))]
 pub trait ISteeringFromSticks<const N: usize> {
     /// 速度を計算する。 \[rpm]
     fn calc_speed(

@@ -1,5 +1,5 @@
 use super::*;
-#[cfg(not(feature = "std"))]
+#[cfg(not(any(feature = "alloc", feature = "std")))]
 use heapless::Vec;
 
 #[cfg(feature = "bind-c")]

@@ -8,6 +8,7 @@ features = [
 version = "2"
 
 [features]
+alloc = []
 controller = []
 std = []
 

@@ -22,6 +22,17 @@ all = [
     "steering-quad-mechanum",
     "steering-quad-omni"
 ]
+all-alloc = [
+    "alloc",
+    "bind-c",
+    "controller",
+    "encoder",
+    "servo",
+    "steering",
+    "steering-crawler",
+    "steering-quad-mechanum",
+    "steering-quad-omni"
+]
 all-std = [
     "bind-c",
     "controller",
@@ -32,6 +43,10 @@ all-std = [
     "steering-crawler",
     "steering-quad-mechanum",
     "steering-quad-omni"
+]
+alloc = [
+    "librobo-macro/alloc",
+    "num/alloc"
 ]
 bind-c = []
 controller = [

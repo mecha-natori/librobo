@@ -19,7 +19,7 @@ use syn::DeriveInput;
 pub fn derive_i_steering_from_sticks(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let ident = input.ident;
-    #[cfg(feature = "std")]
+    #[cfg(any(feature = "alloc", feature = "std"))]
     let expand = quote! {
         impl ISteeringFromSticks for #ident {
             fn calc_speed(
@@ -36,7 +36,7 @@ pub fn derive_i_steering_from_sticks(input: TokenStream) -> TokenStream {
             }
         }
     };
-    #[cfg(not(feature = "std"))]
+    #[cfg(not(any(feature = "alloc", feature = "std")))]
     let expand = quote! {
         impl ISteeringFromSticks<N> for #ident {
             fn calc_speed(

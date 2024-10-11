@@ -7,14 +7,16 @@ use super::ISteeringFromSticks;
 use super::PIDData;
 use super::Steering;
 use crate::controller::NormalizedSticks;
-#[cfg(not(feature = "std"))]
+#[cfg(all(feature = "alloc", not(feature = "std")))]
+use alloc::vec::Vec;
+#[cfg(not(any(feature = "alloc", feature = "std")))]
 use heapless::Vec;
 use num::Complex;
 
 #[cfg(feature = "bind-c")]
 mod ffi;
 
-#[cfg(not(feature = "std"))]
+#[cfg(not(any(feature = "alloc", feature = "std")))]
 const N: usize = 2;
 
 /// クローラー
@@ -22,7 +24,7 @@ const N: usize = 2;
 #[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub struct Crawler;
 
-#[cfg(feature = "std")]
+#[cfg(any(feature = "alloc", feature = "std"))]
 impl ISteering for Crawler {
     /// 速度を計算する。 \[rpm]
     ///
@@ -45,7 +47,7 @@ impl ISteering for Crawler {
     }
 }
 
-#[cfg(not(feature = "std"))]
+#[cfg(not(any(feature = "alloc", feature = "std")))]
 impl ISteering<N> for Crawler {
     /// 速度を計算する。 \[rpm]
     ///

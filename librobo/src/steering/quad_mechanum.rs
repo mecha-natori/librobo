@@ -6,7 +6,9 @@ use super::ISteeringFromSticks;
 use super::PIDData;
 use super::Steering;
 use crate::controller::NormalizedSticks;
-#[cfg(not(feature = "std"))]
+#[cfg(all(feature = "alloc", not(feature = "std")))]
+use alloc::vec::Vec;
+#[cfg(not(any(feature = "alloc", feature = "std")))]
 use heapless::Vec;
 use num::traits::FloatConst;
 use num::Complex;
@@ -16,7 +18,7 @@ use num::Float;
 #[cfg(feature = "bind-c")]
 mod ffi;
 
-#[cfg(not(feature = "std"))]
+#[cfg(not(any(feature = "alloc", feature = "std")))]
 const N: usize = 4;
 
 /// 四輪メカナムホイール
@@ -24,7 +26,7 @@ const N: usize = 4;
 #[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub struct QuadMechanum;
 
-#[cfg(feature = "std")]
+#[cfg(any(feature = "alloc", feature = "std"))]
 impl ISteering for QuadMechanum {
     /// 速度を計算する。 \[rpm]
     ///
@@ -45,7 +47,7 @@ impl ISteering for QuadMechanum {
     }
 }
 
-#[cfg(not(feature = "std"))]
+#[cfg(not(any(feature = "alloc", feature = "std")))]
 impl ISteering<N> for QuadMechanum {
     /// 速度を計算する。 \[rpm]
     ///
