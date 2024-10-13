@@ -7,6 +7,17 @@ default-features = false
 path = "../librobo"
 
 [features]
+all = [
+    "dep:esp32-ds4-driver"
+]
+all-alloc = [
+    "dep:esp32-ds4-driver",
+    "alloc"
+]
+all-std = [
+    "dep:esp32-ds4-driver",
+    "std"
+]
 alloc = [
     "librobo/alloc"
 ]
