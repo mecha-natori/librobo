@@ -36,10 +36,10 @@ impl ISteering<N> for QuadOmni {
         let rl = steering.max_speed as f32 * l_r * (3f32 * f32::FRAC_PI_4() - l_theta).cos();
         let rr = steering.max_speed as f32 * r_r * (3f32 * f32::FRAC_PI_4() + r_theta).cos();
         if let Some(mut pid_data) = pid_data {
-            let fr = process_pid_data(&mut pid_data, fr);
-            let fl = process_pid_data(&mut pid_data, fl);
-            let rl = process_pid_data(&mut pid_data, rl);
-            let rr = process_pid_data(&mut pid_data, rr);
+            let fr = process_pid_data(&mut pid_data[0], fr);
+            let fl = process_pid_data(&mut pid_data[1], fl);
+            let rl = process_pid_data(&mut pid_data[2], rl);
+            let rr = process_pid_data(&mut pid_data[3], rr);
             [fr as i16, fl as i16, rl as i16, rr as i16]
         } else {
             [fr as i16, fl as i16, rl as i16, rr as i16]
