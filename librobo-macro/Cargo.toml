@@ -7,10 +7,12 @@ features = [
 ]
 version = "2"
 
+[dev-dependencies.librobo]
+path = "../librobo"
+
 [features]
-alloc = []
 controller = []
-std = []
+internal = []
 
 [lib]
 name = "robo_macro"

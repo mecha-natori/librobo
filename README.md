@@ -4,9 +4,9 @@
 ![robo_compat 0.1.1](https://img.shields.io/badge/robo__compat-v0.1.1-orange)
 ![robo_macro 0.1.1](https://img.shields.io/badge/robo__macro-v0.1.1-orange)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mecha-natori/librobo/rust.yml?branch=main)
-[![Docuemntation - robo](https://img.shields.io/badge/docs-robo-blue)](https://mecha-natori.github.io/librobo/robo)
-[![Docuemntation - robo_compat](https://img.shields.io/badge/docs-robo__compat-blue)](https://mecha-natori.github.io/librobo/robo_compat)
-[![Docuemntation - robo_macro](https://img.shields.io/badge/docs-robo__macro-blue)](https://mecha-natori.github.io/librobo/robo_macro)
+[![Documentation - robo](https://img.shields.io/badge/docs-robo-blue)](https://mecha-natori.github.io/librobo/robo)
+[![Documentation - robo_compat](https://img.shields.io/badge/docs-robo__compat-blue)](https://mecha-natori.github.io/librobo/robo_compat)
+[![Documentation - robo_macro](https://img.shields.io/badge/docs-robo__macro-blue)](https://mecha-natori.github.io/librobo/robo_macro)
 
 ## Crates
 

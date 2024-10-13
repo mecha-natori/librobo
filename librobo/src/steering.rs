@@ -1,15 +1,14 @@
 //! ステアリング補助モジュール
 
-#[cfg(feature = "controller")]
 use crate::controller::NormalizedSticks;
-#[cfg(feature = "alloc")]
-use alloc::vec::Vec;
 use core::error::Error;
 use core::fmt::Display;
 use core::fmt::Formatter;
 #[cfg(feature = "heapless")]
-use heapless::Vec;
+use heapless::Vec as HVec;
 use num::Complex;
+#[cfg(feature = "controller")]
+pub use robo_macro::ISteeringFromSticks;
 
 #[cfg(feature = "steering-crawler")]
 pub mod crawler;
@@ -70,9 +69,9 @@ impl PIDDataBuilder {
     /// # Error
     /// 制御周期の指定がされていない場合、[MissingParameterError]が返される。
     pub fn build(self) -> Result<PIDData, MissingParameterError> {
-        if self.t.is_none() {
+        let Some(t) = self.t else {
             return Err(MissingParameterError);
-        }
+        };
         Ok(PIDData {
             kp: self.kp.unwrap_or(0f32),
             ki: self.ki.unwrap_or(0f32),
@@ -80,7 +79,7 @@ impl PIDDataBuilder {
             prev_e: 0f32,
             prev_ie: 0f32,
             now_out: 0f32,
-            t: self.t.unwrap()
+            t
         })
     }
 
@@ -118,54 +117,26 @@ pub struct Steering {
 }
 
 /// ステアリングインターフェース
-#[cfg(any(feature = "alloc", feature = "std"))]
-pub trait ISteering {
-    /// 速度を計算する。 \[rpm]
-    fn calc_speed(
-        steering: Steering,
-        pid_data: Option<&mut Vec<PIDData>>,
-        l: Complex<f32>,
-        r: Complex<f32>
-    ) -> Vec<i16>;
-}
-
-/// ステアリングインターフェース
-#[cfg(feature = "heapless")]
 pub trait ISteering<const N: usize> {
     /// 速度を計算する。 \[rpm]
     fn calc_speed(
         steering: Steering,
-        pid_data: Option<&mut Vec<PIDData, N>>,
+        pid_data: Option<&mut [PIDData; N]>,
         l: Complex<f32>,
         r: Complex<f32>
-    ) -> Vec<i16, N>;
+    ) -> [i16; N];
 }
 
 /// ステアリングインターフェース
-#[cfg(all(any(feature = "alloc", feature = "std"), feature = "controller"))]
-pub trait ISteeringFromSticks {
-    /// 速度を計算する。 \[rpm]
-    fn calc_speed(
-        steering: Steering,
-        pid_data: Option<&mut Vec<PIDData>>,
-        sticks: NormalizedSticks
-    ) -> Vec<i16>;
-}
-
-/// ステアリングインターフェース
-#[cfg(all(feature = "controller", feature = "heapless"))]
+#[cfg(feature = "controller")]
 pub trait ISteeringFromSticks<const N: usize> {
     /// 速度を計算する。 \[rpm]
     fn calc_speed(
         steering: Steering,
-        pid_data: Option<&mut Vec<PIDData, N>>,
+        pid_data: Option<&mut [PIDData; N]>,
         sticks: NormalizedSticks
-    ) -> Vec<i16, N>;
+    ) -> [i16; N];
 }
-
-/// [ISteeringFromSticks]のDeriveの再エクスポート。
-#[cfg(feature = "controller")]
-pub use robo_macro::ISteeringFromSticks;
 
 /// PIDデータに基づいて目標値を加工する。
 pub fn process_pid_data(pid_data: &mut PIDData, target: f32) -> f32 {

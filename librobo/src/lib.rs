@@ -7,6 +7,7 @@
 #![warn(missing_docs, rustdoc::missing_crate_level_docs)]
 
 #[cfg(feature = "alloc")]
+#[macro_use]
 extern crate alloc;
 
 #[cfg(feature = "controller")]
@@ -22,3 +23,11 @@ pub mod servo;
 
 #[cfg(feature = "steering")]
 pub mod steering;
+
+pub(crate) mod util;
+
+#[cfg(feature = "bind-c")]
+#[panic_handler]
+fn panic(_info: &core::panic::PanicInfo) -> ! {
+    loop {}
+}

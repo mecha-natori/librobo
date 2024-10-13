@@ -1,5 +1,3 @@
-use super::*;
-
 #[cfg(feature = "bind-c")]
 mod c {
     use super::*;
@@ -12,7 +10,7 @@ mod c {
         if pid_data.is_null() {
             return target;
         }
-        let pid_data = pid_data.as_mut().unwrap();
+        let Some(pid_data) = pid_data.as_mut();
         process_pid_data(pid_data, target)
     }
 }

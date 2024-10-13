@@ -1,8 +1,6 @@
-use super::*;
-
 #[cfg(feature = "bind-c")]
 mod c {
-    use super::*;
+    use super::super::*;
 
     #[no_mangle]
     extern "C" fn robo_controller_normalize_sticks(sticks: Sticks) -> NormalizedSticks {

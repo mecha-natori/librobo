@@ -4,7 +4,9 @@ optional = true
 version = "0.8"
 
 [dependencies.librobo-macro]
-default-features = false
+features = [
+    "internal"
+]
 path = "../librobo-macro"
 
 [dependencies.num]
@@ -13,10 +15,9 @@ version = "0.4"
 
 [features]
 all = [
-    "bind-c",
     "controller",
-    "dep:heapless",
     "encoder",
+    "heapless",
     "num/libm",
     "servo",
     "steering",
@@ -25,8 +26,7 @@ all = [
     "steering-quad-omni"
 ]
 all-alloc = [
-    "alloc",
-    "bind-c",
+    "alloc-nostd",
     "controller",
     "encoder",
     "servo",
@@ -36,7 +36,6 @@ all-alloc = [
     "steering-quad-omni"
 ]
 all-std = [
-    "bind-c",
     "controller",
     "encoder",
     "servo",
@@ -47,21 +46,27 @@ all-std = [
     "steering-quad-omni"
 ]
 alloc = [
-    "librobo-macro/alloc",
     "num/alloc"
+]
+alloc-nostd = [
+    "alloc",
+    "num/libm"
 ]
 bind-c = []
 controller = [
     "librobo-macro/controller"
 ]
 default = [
-    "dep:heapless",
     "num/libm"
 ]
 encoder = []
+heapless = [
+    "dep:heapless"
+]
+panic_handler = []
 servo = []
 std = [
-    "librobo-macro/std",
+    "alloc",
     "num/std"
 ]
 steering = []
@@ -76,11 +81,6 @@ steering-quad-omni = [
 ]
 
 [lib]
-crate-type = [
-    "cdylib",
-    "rlib",
-    "staticlib"
-]
 name = "robo"
 
 [package]
@@ -90,4 +90,4 @@ authors = [
 edition = "2021"
 name = "librobo"
 readme = "../README.md"
-version = "0.2.0"
+version = "0.3.0"

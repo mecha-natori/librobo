@@ -3,14 +3,21 @@ git = "https://github.com/ms0503/ESP32-DS4-driver.git"
 optional = true
 
 [dependencies.librobo]
+default-features = false
 path = "../librobo"
 
-[lib]
-crate-type = [
-    "cdylib",
-    "rlib",
-    "staticlib"
+[features]
+alloc = [
+    "librobo/alloc"
 ]
+default = [
+    "librobo/default"
+]
+std = [
+    "librobo/std"
+]
+
+[lib]
 name = "robo_compat"
 
 [package]
