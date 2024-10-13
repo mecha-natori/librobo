@@ -42,12 +42,12 @@ if ! ($NO_STD || $STD); then
     printf "-nか-sを指定してください。\n"
     exit 1
 fi
-BUILD_ARGS=(--no-default-features)
+BUILD_ARGS=(--no-default-features --crate-type staticlib)
 if $NO_STD; then
-    BUILD_ARGS+=(--features all)
+    BUILD_ARGS+=(--features "all,bind-c")
 fi
 if $STD; then
-    BUILD_ARGS+=(--features all-std)
+    BUILD_ARGS+=(--features "all-std,bind-c")
 fi
 if $RELEASE; then
     BUILD_ARGS+=(--release)

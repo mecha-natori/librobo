@@ -25,14 +25,14 @@ if(-not ($NO_STD -or $STD)) {
     Write-Output "-nか-sを指定してください。"
     exit 1
 }
-[array] $BUILD_ARGS = @("--no-default-features")
+[array] $BUILD_ARGS = @("--no-default-features", "--crate-type", "staticlib")
 if($NO_STD) {
     $BUILD_ARGS += "--features"
-    $BUILD_ARGS += "all"
+    $BUILD_ARGS += "all,bind-c"
 }
 if($STD) {
     $BUILD_ARGS += "--features"
-    $BUILD_ARGS += "all-std"
+    $BUILD_ARGS += "all-std,bind-c"
 }
 if($RELEASE) {
     $BUILD_ARGS += "--release"
