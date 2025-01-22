@@ -9,6 +9,8 @@
 #[cfg(feature = "alloc")]
 #[macro_use]
 extern crate alloc;
+#[cfg(feature = "bind-c")]
+extern crate panic_abort;
 
 #[cfg(feature = "controller")]
 pub mod controller;
@@ -25,9 +27,3 @@ pub mod servo;
 pub mod steering;
 
 pub(crate) mod util;
-
-#[cfg(feature = "bind-c")]
-#[panic_handler]
-fn panic(_info: &core::panic::PanicInfo) -> ! {
-    loop {}
-}

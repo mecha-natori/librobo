@@ -42,9 +42,9 @@ if ! ($NO_STD || $STD); then
     printf "-nか-sを指定してください。\n"
     exit 1
 fi
-BUILD_ARGS=(--no-default-features --crate-type staticlib)
+BUILD_ARGS=(--no-default-features --example robo)
 if $NO_STD; then
-    BUILD_ARGS+=(--features "all,bind-c")
+    BUILD_ARGS+=(--features "all,bind-c" --config 'profile.dev.panic="abort"' --config 'profile.release.panic="abort"')
 fi
 if $STD; then
     BUILD_ARGS+=(--features "all-std,bind-c")
@@ -59,10 +59,14 @@ if ! command -v cargo; then
 fi
 LIB_PATH=""
 if $RELEASE; then
-    LIB_PATH="target/$TARGET_TRIPLE${TARGET_TRIPLE:+/}release/librobo.a"
+    LIB_PATH="target/$TARGET_TRIPLE${TARGET_TRIPLE:+/}release/examples/librobo.a"
 else
-    LIB_PATH="target/$TARGET_TRIPLE${TARGET_TRIPLE:+/}debug/librobo.a"
+    LIB_PATH="target/$TARGET_TRIPLE${TARGET_TRIPLE:+/}debug/examples/librobo.a"
 fi
+if [[ -n $TARGET_TRIPLE ]]; then
+    BUILD_ARGS+=(--target "$TARGET_TRIPLE")
+fi
+printf "Executing cargo build %s\n" "${BUILD_ARGS[*]}"
 cargo build "${BUILD_ARGS[@]}"
 install -dm755 bindings/c/lib
 install -dm755 bindings/cxx/lib

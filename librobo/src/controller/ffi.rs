@@ -9,14 +9,16 @@ mod c {
 
     #[no_mangle]
     extern "C" fn robo_controller_is_sticks_in_dead_zone(sticks: Sticks) -> *const bool {
-        is_sticks_in_dead_zone(sticks).as_ptr()
+        let results = is_sticks_in_dead_zone(sticks);
+        results.as_ptr()
     }
 
     #[no_mangle]
     extern "C" fn robo_controller_is_normalized_sticks_in_dead_zone(
         sticks: NormalizedSticks
     ) -> *const bool {
-        is_normalized_sticks_in_dead_zone(sticks).as_ptr()
+        let results = is_normalized_sticks_in_dead_zone(sticks);
+        results.as_ptr()
     }
 
     #[no_mangle]

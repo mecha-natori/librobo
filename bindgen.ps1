@@ -25,7 +25,7 @@ if(-not ($NO_STD -or $STD)) {
     Write-Output "-nか-sを指定してください。"
     exit 1
 }
-[array] $BUILD_ARGS = @("--no-default-features", "--crate-type", "staticlib")
+[array] $BUILD_ARGS = @("--no-default-features", "--example", "robo")
 if($NO_STD) {
     $BUILD_ARGS += "--features"
     $BUILD_ARGS += "all,bind-c"
@@ -44,10 +44,15 @@ if(-not (Get-Command -Name cargo -ErrorAction SilentlyContinue)) {
 }
 $LIB_PATH = ""
 if($RELEASE) {
-    $LIB_PATH = "target/$( $TARGET_TRIPLE ? "$TARGET_TRIPLE/" : [string]::Empty )release/librobo.a"
+    $LIB_PATH = "target/$( $TARGET_TRIPLE ? "$TARGET_TRIPLE/" : [string]::Empty )release/examples/librobo.a"
 } else {
-    $LIB_PATH = "target/$( $TARGET_TRIPLE ? "$TARGET_TRIPLE/" : [string]::Empty )debug/librobo.a"
+    $LIB_PATH = "target/$( $TARGET_TRIPLE ? "$TARGET_TRIPLE/" : [string]::Empty )debug/examples/librobo.a"
 }
+if(-not [System.String]::IsNullOrEmpty($TARGET_TRIPLE)) {
+    $BUILD_ARGS += "--target"
+    $BUILD_ARGS += $TARGET_TRIPLE
+}
+Write-Output "Executing cargo build $(@BUILD_ARGS)"
 cargo build @BUILD_ARGS
 New-Item -Path bindings/c/lib -ItemType Directory -Force
 New-Item -Path bindings/cxx/lib -ItemType Directory -Force

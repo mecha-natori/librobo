@@ -9,7 +9,7 @@ pub struct VecWrapper<'a, T, const N: usize> {
     #[cfg(feature = "alloc")]
     vec_a: &'a mut AVec<T>,
     #[cfg(feature = "heapless")]
-    vec_h: &'a HVec<T, N>
+    vec_h: &'a mut HVec<T, N>
 }
 
 #[cfg(feature = "alloc")]
