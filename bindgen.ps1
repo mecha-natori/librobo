@@ -2,9 +2,9 @@ Param([switch] $h, [switch] $n, [switch] $r, [switch] $s, [string] $t)
 
 if($h) {
     Write-Output "バインディングの生成スクリプト"
-    Write-Output
+    Write-Output ""
     Write-Output "使い方: bindgen.ps1 [OPTIONS...]"
-    Write-Output
+    Write-Output ""
     Write-Output "オプション:"
     Write-Output "  -h                  ヘルプを表示"
     Write-Output "  -n                  no_std環境としてビルド"
