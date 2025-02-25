@@ -1,0 +1,22 @@
+{
+    "idf-rust": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "idf-rust",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "arch": null,
+            "finalImageName": null,
+            "finalImageTag": null,
+            "imageDigest": "sha256:96cda7593e101140c2f9591b53a473513eed19667f8ac5630304490de2e26b64",
+            "imageName": "espressif/idf-rust",
+            "imageTag": "all_latest",
+            "os": null,
+            "sha256": "sha256-MYipDlo/kWen1V8cQebqAgjO8P/icC4HkNQeWy7wcPA=",
+            "tlsVerify": null
+        },
+        "version": "all_latest"
+    }
+}
