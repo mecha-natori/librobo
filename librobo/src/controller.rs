@@ -43,14 +43,12 @@ pub fn normalize_sticks(sticks: Sticks) -> NormalizedSticks {
     let ly = sticks.l[1] as f32 / i16::MAX as f32;
     let lr = f32::hypot(lx, ly);
     let ltheta = f32::atan2(ly, lx);
-    let lr = (lr / (ltheta.sin() + ltheta.cos())).abs();
     let lx = lr * ltheta.cos();
     let ly = lr * ltheta.sin();
     let rx = sticks.r[0] as f32 / i16::MAX as f32;
     let ry = sticks.r[1] as f32 / i16::MAX as f32;
     let rr = f32::hypot(rx, ry);
     let rtheta = f32::atan2(ry, rx);
-    let rr = (rr / (rtheta.sin() + rtheta.cos())).abs();
     let rx = rr * rtheta.cos();
     let ry = rr * rtheta.sin();
     NormalizedSticks {
