@@ -16,6 +16,8 @@ use num::Unsigned;
 mod ffi;
 
 /// 左右スティック
+///
+/// 各スティックのX軸は右が正であり、Y軸は上が正である。
 #[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
 #[repr(C)]
 pub struct Sticks {
@@ -28,6 +30,8 @@ pub struct Sticks {
 }
 
 /// -1 - 1に正規化された左右スティック
+///
+/// 各スティックのX軸は右が正であり、Y軸は上が正である。
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 #[repr(C)]
 pub struct NormalizedSticks {
