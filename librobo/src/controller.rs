@@ -45,8 +45,16 @@ pub fn normalize_sticks(sticks: Sticks) -> NormalizedSticks {
     let lx = sticks.l[0] as f32 / i16::MAX as f32;
     let ly = sticks.l[1] as f32 / i16::MAX as f32;
     trace_log!(target: "librobo/controller", "LX: {}, LY: {}", lx, ly);
+    let lr = lx.hypot(ly);
+    let lx = if 0f32 < lr { lx / lr } else { 0f32 };
+    let ly = if 0f32 < lr { ly / lr } else { 0f32 };
+    trace_log!(target: "librobo/controller", "LX: {}, LY: {}", lx, ly);
     let rx = sticks.r[0] as f32 / i16::MAX as f32;
     let ry = sticks.r[1] as f32 / i16::MAX as f32;
+    trace_log!(target: "librobo/controller", "RX: {}, RY: {}", rx, ry);
+    let rr = rx.hypot(ry);
+    let rx = if 0f32 < rr { rx / rr } else { 0f32 };
+    let ry = if 0f32 < rr { ry / rr } else { 0f32 };
     trace_log!(target: "librobo/controller", "RX: {}, RY: {}", rx, ry);
     let normalized = NormalizedSticks {
         l: [lx, ly],
