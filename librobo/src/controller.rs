@@ -71,10 +71,10 @@ pub fn normalize_sticks(sticks: Sticks) -> NormalizedSticks {
 /// 戻り値は\[Left X, Left Y, Right X, Right Y]。
 pub fn is_sticks_in_dead_zone(sticks: Sticks) -> [bool; 4] {
     debug_log!(target: "librobo/controller", "check sticks is in dead zone: {:?}", sticks);
-    let lx = sticks.l[0].abs() as f32 <= sticks.dead_zone as f32 / 100f32;
-    let ly = sticks.l[1].abs() as f32 <= sticks.dead_zone as f32 / 100f32;
-    let rx = sticks.r[0].abs() as f32 <= sticks.dead_zone as f32 / 100f32;
-    let ry = sticks.r[1].abs() as f32 <= sticks.dead_zone as f32 / 100f32;
+    let lx = sticks.l[0].abs() as f32 / i16::MAX as f32 <= sticks.dead_zone as f32 / 100f32;
+    let ly = sticks.l[1].abs() as f32 / i16::MAX as f32 <= sticks.dead_zone as f32 / 100f32;
+    let rx = sticks.r[0].abs() as f32 / i16::MAX as f32 <= sticks.dead_zone as f32 / 100f32;
+    let ry = sticks.r[1].abs() as f32 / i16::MAX as f32 <= sticks.dead_zone as f32 / 100f32;
     let result = [lx, ly, rx, ry];
     debug_log!(target: "librobo/controller", "check result: {:?}", result);
     result
