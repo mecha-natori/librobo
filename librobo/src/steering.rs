@@ -1,6 +1,8 @@
 //! ステアリング補助モジュール
 
 use crate::controller::NormalizedSticks;
+use crate::debug_log;
+use crate::trace_log;
 use core::error::Error;
 use core::fmt::Display;
 use core::fmt::Formatter;
@@ -52,7 +54,8 @@ impl Display for MissingParameterError {
     }
 }
 
-impl Error for MissingParameterError {}
+impl Error for MissingParameterError {
+}
 
 /// PID制御データのビルダー
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
@@ -72,6 +75,7 @@ impl PIDDataBuilder {
         let Some(t) = self.t else {
             return Err(MissingParameterError);
         };
+        debug_log!(target: "librobo/steering", "build PIDData from: {:?}", &self);
         Ok(PIDData {
             kp: self.kp.unwrap_or(0f32),
             ki: self.ki.unwrap_or(0f32),
@@ -140,10 +144,14 @@ pub trait ISteeringFromSticks<const N: usize> {
 
 /// PIDデータに基づいて目標値を加工する。
 pub fn process_pid_data(pid_data: &mut PIDData, target: f32) -> f32 {
+    debug_log!(target: "librobo/steering", "process target {} with PID data: {:?}", target, pid_data);
     let e = target - pid_data.now_out;
     let de = (e - pid_data.prev_e) / pid_data.t;
     let ie = pid_data.prev_ie + (e + pid_data.prev_e) * pid_data.t / 2f32;
+    trace_log!(target: "librobo/steering", "e: {}, ie: {}, de: {}", e, ie, de);
     pid_data.prev_e = e;
     pid_data.prev_ie = ie;
-    pid_data.kp * e + pid_data.ki * ie + pid_data.kd * de
+    let processed = pid_data.kp * e + pid_data.ki * ie + pid_data.kd * de;
+    debug_log!(target: "librobo/steering", "processed target {}", processed);
+    processed
 }
