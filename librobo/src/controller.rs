@@ -71,7 +71,13 @@ pub fn normalize_sticks(sticks: Sticks) -> NormalizedSticks {
 /// 戻り値は\[Left X, Left Y, Right X, Right Y]。
 pub fn is_sticks_in_dead_zone(sticks: Sticks) -> [bool; 4] {
     debug_log!(target: "librobo/controller", "check sticks is in dead zone: {:?}", sticks);
-    is_normalized_sticks_in_dead_zone(normalize_sticks(sticks))
+    let lx = sticks.l[0].abs() as f32 <= sticks.dead_zone as f32 / 100f32;
+    let ly = sticks.l[1].abs() as f32 <= sticks.dead_zone as f32 / 100f32;
+    let rx = sticks.r[0].abs() as f32 <= sticks.dead_zone as f32 / 100f32;
+    let ry = sticks.r[1].abs() as f32 <= sticks.dead_zone as f32 / 100f32;
+    let result = [lx, ly, rx, ry];
+    debug_log!(target: "librobo/controller", "check result: {:?}", result);
+    result
 }
 
 /// 正規化された左右スティック入力がそれぞれデッドゾーンに「入っているか」を判定する。
@@ -80,13 +86,15 @@ pub fn is_sticks_in_dead_zone(sticks: Sticks) -> [bool; 4] {
 /// 戻り値は\[Left X, Left Y, Right X, Right Y]。
 pub fn is_normalized_sticks_in_dead_zone(sticks: NormalizedSticks) -> [bool; 4] {
     debug_log!(target: "librobo/controller", "check normalized sticks is in dead zone: {:?}", sticks);
-    let lx = sticks.l[0].abs() <= sticks.dead_zone as f32 / 100f32;
-    let ly = sticks.l[1].abs() <= sticks.dead_zone as f32 / 100f32;
-    let rx = sticks.r[0].abs() <= sticks.dead_zone as f32 / 100f32;
-    let ry = sticks.r[1].abs() <= sticks.dead_zone as f32 / 100f32;
-    let result = [lx, ly, rx, ry];
-    debug_log!(target: "librobo/controller", "check result: {:?}", result);
-    result
+    let lx = sticks.l[0] * i16::MAX as f32;
+    let ly = sticks.l[1] * i16::MAX as f32;
+    let rx = sticks.r[0] * i16::MAX as f32;
+    let ry = sticks.r[1] * i16::MAX as f32;
+    is_sticks_in_dead_zone(Sticks {
+        l: [lx as i16, ly as i16],
+        r: [rx as i16, ry as i16],
+        dead_zone: sticks.dead_zone
+    })
 }
 
 /// 左右スティック入力のデッドゾーンを処理する。
