@@ -1,8 +1,8 @@
 # librobo
 
-![robo 0.3.2-dev](https://img.shields.io/badge/robo-v0.3.2--dev-orange)
+![robo 0.3.3-dev](https://img.shields.io/badge/robo-v0.3.3--dev-orange)
 ![robo_compat 0.1.1](https://img.shields.io/badge/robo__compat-v0.1.1-orange)
-![robo_macro 0.1.1](https://img.shields.io/badge/robo__macro-v0.1.1-orange)
+![robo_macro 0.2.0](https://img.shields.io/badge/robo__macro-v0.2.0-orange)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mecha-natori/librobo/rust.yml?branch=main)
 [![Documentation - robo](https://img.shields.io/badge/docs-robo-blue)](https://mecha-natori.github.io/librobo/robo)
 [![Documentation - robo_compat](https://img.shields.io/badge/docs-robo__compat-blue)](https://mecha-natori.github.io/librobo/robo_compat)

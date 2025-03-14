@@ -9,7 +9,7 @@
 #[cfg(feature = "alloc")]
 #[macro_use]
 extern crate alloc;
-#[cfg(feature = "bind-c")]
+#[cfg(feature = "panic-handler")]
 extern crate panic_abort;
 
 #[cfg(feature = "controller")]
