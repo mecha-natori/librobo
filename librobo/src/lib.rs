@@ -4,6 +4,7 @@
 
 #![allow(unused)]
 #![cfg_attr(not(feature = "std"), no_std)]
+#![feature(decl_macro)]
 #![warn(missing_docs, rustdoc::missing_crate_level_docs)]
 
 #[cfg(feature = "alloc")]

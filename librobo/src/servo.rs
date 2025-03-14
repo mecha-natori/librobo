@@ -1,6 +1,6 @@
 //! サーボ補助モジュール
 
-use crate::debug_log;
+use crate::util::debug_log;
 
 #[cfg(feature = "bind-c")]
 mod ffi;

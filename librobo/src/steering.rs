@@ -1,8 +1,8 @@
 //! ステアリング補助モジュール
 
 use crate::controller::NormalizedSticks;
-use crate::debug_log;
-use crate::trace_log;
+use crate::util::debug_log;
+use crate::util::trace_log;
 use core::error::Error;
 use core::fmt::Display;
 use core::fmt::Formatter;

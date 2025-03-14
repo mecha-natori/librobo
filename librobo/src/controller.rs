@@ -1,8 +1,8 @@
 //! コントローラー入力補助モジュール
 
-use crate::debug_log;
 use crate::math::Cartesian;
-use crate::trace_log;
+use crate::util::debug_log;
+use crate::util::trace_log;
 use num::Bounded;
 use num::Float;
 use num::Integer;

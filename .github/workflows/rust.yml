@@ -14,7 +14,7 @@ jobs:
       - name: Run tests
         run: |
           cargo test \
-            --features all \
+            --features all,panic-handler \
             --no-default-features \
             --verbose
   build-no_std-alloc:
@@ -30,7 +30,7 @@ jobs:
       - name: Run tests
         run: |
           cargo test \
-            --features all-alloc \
+            --features all-alloc,panic-handler \
             --no-default-features \
             --verbose
   build-std:

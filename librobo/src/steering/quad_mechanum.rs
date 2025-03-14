@@ -7,8 +7,8 @@ use super::PIDData;
 use super::Steering;
 use super::process_pid_data;
 use crate::controller::NormalizedSticks;
-use crate::debug_log;
-use crate::trace_log;
+use crate::util::debug_log;
+use crate::util::trace_log;
 use num::Complex;
 #[cfg(not(feature = "std"))]
 use num::Float;
