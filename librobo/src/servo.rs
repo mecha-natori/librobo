@@ -1,5 +1,7 @@
 //! サーボ補助モジュール
 
+use crate::debug_log;
+
 #[cfg(feature = "bind-c")]
 mod ffi;
 
@@ -24,6 +26,9 @@ pub struct ServoDefinition {
 /// max_duty - 100%時のデューティの値
 /// servo    - サーボの仕様データ
 pub fn calc_servo_duty(deg: i16, max_duty: u16, servo: ServoDefinition) -> u16 {
-    ((deg - servo.min_deg) / (servo.max_deg - servo.min_deg)) as u16 * (servo.max_ms - servo.min_ms) +
-        servo.min_ms
+    let duty = ((deg - servo.min_deg) / (servo.max_deg - servo.min_deg)) as u16
+        * (servo.max_ms - servo.min_ms)
+        + servo.min_ms;
+    debug_log!(target: "librobo/servo", "calc servo duty: {}", duty);
+    duty
 }
