@@ -81,4 +81,4 @@ authors = ["Sora Tonami <ms0503@outlook.com>"]
 edition = "2021"
 name = "librobo"
 readme = "../README.md"
-version = "0.3.2-dev"
+version = "0.3.2"
