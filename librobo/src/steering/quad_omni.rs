@@ -20,7 +20,6 @@ mod ffi;
 const N: usize = 4;
 
 /// 四輪オムニホイール
-#[cfg_attr(feature = "controller", derive(ISteeringFromSticks))]
 #[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub struct QuadOmni;
 

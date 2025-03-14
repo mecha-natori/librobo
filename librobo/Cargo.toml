@@ -3,10 +3,6 @@ default-features = false
 optional = true
 version = "0.8"
 
-[dependencies.librobo-macro]
-features = ["internal"]
-path = "../librobo-macro"
-
 [dependencies.log]
 optional = true
 version = "0.4"
@@ -59,7 +55,7 @@ all-std = [
 alloc = ["num/alloc"]
 alloc-nostd = ["alloc", "num/libm"]
 bind-c = ["dep:panic-abort"]
-controller = ["librobo-macro/controller"]
+controller = []
 default = ["num/libm"]
 encoder = []
 heapless = ["dep:heapless"]
@@ -81,4 +77,4 @@ authors = ["Sora Tonami <ms0503@outlook.com>"]
 edition = "2021"
 name = "librobo"
 readme = "../README.md"
-version = "0.3.2"
+version = "0.3.3-dev"

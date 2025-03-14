@@ -20,7 +20,6 @@ mod ffi;
 const N: usize = 4;
 
 /// 四輪メカナムホイール
-#[cfg_attr(feature = "controller", derive(ISteeringFromSticks))]
 #[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub struct QuadMechanum;
 

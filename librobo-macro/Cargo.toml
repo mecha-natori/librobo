@@ -1,19 +1,3 @@
-[dependencies]
-quote = "1"
-
-[dependencies.syn]
-features = [
-    "extra-traits"
-]
-version = "2"
-
-[dev-dependencies.librobo]
-path = "../librobo"
-
-[features]
-controller = []
-internal = []
-
 [lib]
 name = "robo_macro"
 proc-macro = true
@@ -25,4 +9,4 @@ authors = [
 edition = "2021"
 name = "librobo-macro"
 readme = "../README.md"
-version = "0.1.1"
+version = "0.2.0"
