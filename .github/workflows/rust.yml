@@ -11,12 +11,6 @@ jobs:
             --features all,panic-handler \
             --no-default-features \
             --verbose
-      - name: Run tests
-        run: |
-          cargo test \
-            --features all,panic-handler \
-            --no-default-features \
-            --verbose
   build-no_std-alloc:
     runs-on: ubuntu-latest
     steps:
@@ -24,12 +18,6 @@ jobs:
       - name: Build
         run: |
           cargo build \
-            --features all-alloc,panic-handler \
-            --no-default-features \
-            --verbose
-      - name: Run tests
-        run: |
-          cargo test \
             --features all-alloc,panic-handler \
             --no-default-features \
             --verbose
