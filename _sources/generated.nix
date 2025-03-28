@@ -6,8 +6,8 @@
     version = "all_latest";
     src = dockerTools.pullImage {
       imageName = "espressif/idf-rust";
-      imageDigest = "sha256:96cda7593e101140c2f9591b53a473513eed19667f8ac5630304490de2e26b64";
-      sha256 = "sha256-MYipDlo/kWen1V8cQebqAgjO8P/icC4HkNQeWy7wcPA=";
+      imageDigest = "sha256:0548e817d6cfccf04859bb72746a3b5425428e8da68c503dd48288e6bca13084";
+      sha256 = "sha256-3W4vjmrEY38RaCcbRmG5fyvV574vmxC0dE4HymnpTUc=";
       finalImageTag = "all_latest";
     };
   };

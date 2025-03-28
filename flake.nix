@@ -30,26 +30,22 @@
     inputs@{
       fenix,
       flake-parts,
-      git-hooks,
       nixpkgs,
       systems,
-      treefmt-nix,
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
-        git-hooks.flakeModule
-        treefmt-nix.flakeModule
+        ./treefmt.nix
+        ./git-hooks.nix
       ];
       perSystem =
-        { inputs', system, ... }:
+        {
+          inputs',
+          pkgs,
+          ...
+        }:
         let
-          pkgs = import nixpkgs {
-            inherit system;
-            overlays = [
-              fenix.overlays.default
-            ];
-          };
           sources = import ./_sources/generated.nix {
             inherit (pkgs)
               dockerTools
@@ -60,7 +56,6 @@
           };
         in
         {
-          _module.args.pkgs = pkgs;
           devShells.default =
             let
               esp32-rust = inputs'.esp32-rust.packages.esp32.overrideAttrs (
@@ -83,7 +78,7 @@
                   ldproxy
                   nvfetcher
                 ])
-                ++ (with pkgs.fenix; [
+                ++ (with inputs'.fenix.packages; [
                   (combine [
                     latest.toolchain
                     targets.thumbv7em-none-eabi.latest.rust-std
@@ -91,33 +86,10 @@
                   ])
                 ]);
               shellHook = ''
-                export PATH="${esp32-rust}/.rustup/toolchains/esp/bin:$PATH"
+                export PATH="$${esp32-rust}/.rustup/toolchains/esp/bin:$PATH"
                 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
               '';
             };
-          pre-commit = {
-            check.enable = true;
-            settings = {
-              hooks = {
-                actionlint.enable = true;
-                check-json.enable = true;
-                check-toml.enable = true;
-                editorconfig-checker = {
-                  enable = true;
-                  excludes = [
-                    "Cargo.lock"
-                    "flake.lock"
-                  ];
-                };
-                luacheck.enable = true;
-                markdownlint.enable = true;
-                yamlfmt.enable = true;
-                yamllint.enable = true;
-              };
-              src = ./.;
-            };
-          };
-          treefmt = import ./treefmt.nix;
         };
       systems = import systems;
     };

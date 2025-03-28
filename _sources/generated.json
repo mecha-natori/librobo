@@ -10,11 +10,11 @@
             "arch": null,
             "finalImageName": null,
             "finalImageTag": null,
-            "imageDigest": "sha256:96cda7593e101140c2f9591b53a473513eed19667f8ac5630304490de2e26b64",
+            "imageDigest": "sha256:0548e817d6cfccf04859bb72746a3b5425428e8da68c503dd48288e6bca13084",
             "imageName": "espressif/idf-rust",
             "imageTag": "all_latest",
             "os": null,
-            "sha256": "sha256-MYipDlo/kWen1V8cQebqAgjO8P/icC4HkNQeWy7wcPA=",
+            "sha256": "sha256-3W4vjmrEY38RaCcbRmG5fyvV574vmxC0dE4HymnpTUc=",
             "tlsVerify": null
         },
         "version": "all_latest"
