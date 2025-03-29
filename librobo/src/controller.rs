@@ -110,7 +110,7 @@ pub fn is_sticks_in_dead_zone(sticks: Sticks) -> [bool; 4] {
 /// 戻り値は\[Left X, Left Y, Right X, Right Y]。
 #[deprecated(
     note = "正規化時にチェックするよう変更したため常にfalseを返す。",
-    since = "0.3.3"
+    since = "0.4.0"
 )]
 pub fn is_normalized_sticks_in_dead_zone(sticks: NormalizedSticks) -> [bool; 4] {
     debug_log!(target: "librobo/controller", "check normalized sticks is in dead zone: {:?}", sticks);
@@ -157,36 +157,10 @@ pub fn process_sticks_dead_zone(sticks: Sticks) -> Sticks {
 /// 正規化された左右スティック入力のデッドゾーンを処理する。
 ///
 /// 各スティック入力を各軸ごとに読み取り、デッドゾーン内であれば0に置き換える。
+#[deprecated(
+    note = "正規化時にチェックするよう変更したため常に入力を返す。",
+    since = "0.4.0"
+)]
 pub fn process_normalized_sticks_dead_zone(sticks: NormalizedSticks) -> NormalizedSticks {
-    debug_log!(target: "librobo/controller", "process each normalized stick's dead zone: {:?}", sticks);
-    let is_in_dead_zone = is_normalized_sticks_in_dead_zone(sticks);
-    let processed = NormalizedSticks {
-        l: [
-            if is_in_dead_zone[0] {
-                0f32
-            } else {
-                sticks.l[0]
-            },
-            if is_in_dead_zone[1] {
-                0f32
-            } else {
-                sticks.l[1]
-            }
-        ],
-        r: [
-            if is_in_dead_zone[2] {
-                0f32
-            } else {
-                sticks.r[0]
-            },
-            if is_in_dead_zone[3] {
-                0f32
-            } else {
-                sticks.r[1]
-            }
-        ],
-        ..sticks
-    };
-    debug_log!(target: "librobo/controller", "processed normalized sticks: {:?}", processed);
-    processed
+    sticks
 }
