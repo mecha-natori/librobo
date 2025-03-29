@@ -6,17 +6,13 @@ use super::ISteeringFromSticks;
 use super::PIDData;
 use super::Steering;
 use super::process_pid_data;
-use crate::debug_log;
-use crate::trace_log;
+use crate::util::debug_log;
+use crate::util::trace_log;
 use num::Complex;
-
-#[cfg(feature = "bind-c")]
-mod ffi;
 
 const N: usize = 2;
 
 /// クローラー
-#[cfg_attr(feature = "controller", derive(ISteeringFromSticks))]
 #[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub struct Crawler;
 

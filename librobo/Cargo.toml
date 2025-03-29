@@ -3,10 +3,6 @@ default-features = false
 optional = true
 version = "0.8"
 
-[dependencies.librobo-macro]
-features = ["internal"]
-path = "../librobo-macro"
-
 [dependencies.log]
 optional = true
 version = "0.4"
@@ -26,46 +22,46 @@ path = "src/lib.rs"
 
 [features]
 all = [
-    "controller",
-    "encoder",
-    "heapless",
-    "num/libm",
-    "servo",
-    "steering",
-    "steering-crawler",
-    "steering-quad-mechanum",
-    "steering-quad-omni",
+  "controller",
+  "encoder",
+  "heapless",
+  "num/libm",
+  "servo",
+  "steering",
+  "steering-crawler",
+  "steering-quad-mechanum",
+  "steering-quad-omni",
 ]
 all-alloc = [
-    "alloc-nostd",
-    "controller",
-    "encoder",
-    "servo",
-    "steering",
-    "steering-crawler",
-    "steering-quad-mechanum",
-    "steering-quad-omni",
+  "alloc-nostd",
+  "controller",
+  "encoder",
+  "servo",
+  "steering",
+  "steering-crawler",
+  "steering-quad-mechanum",
+  "steering-quad-omni",
 ]
 all-std = [
-    "controller",
-    "encoder",
-    "servo",
-    "std",
-    "steering",
-    "steering-crawler",
-    "steering-quad-mechanum",
-    "steering-quad-omni",
+  "controller",
+  "encoder",
+  "servo",
+  "std",
+  "steering",
+  "steering-crawler",
+  "steering-quad-mechanum",
+  "steering-quad-omni",
 ]
 alloc = ["num/alloc"]
 alloc-nostd = ["alloc", "num/libm"]
-bind-c = ["dep:panic-abort"]
-controller = ["librobo-macro/controller"]
+controller = []
 default = ["num/libm"]
 encoder = []
 heapless = ["dep:heapless"]
 log = ["dep:log"]
 log_lvl_1 = ["log", "log/max_level_debug"]
 log_lvl_2 = ["log", "log/max_level_trace"]
+panic-handler = ["dep:panic-abort"]
 servo = []
 std = ["alloc", "log/std", "num/std"]
 steering = []
@@ -81,4 +77,4 @@ authors = ["Sora Tonami <ms0503@outlook.com>"]
 edition = "2021"
 name = "librobo"
 readme = "../README.md"
-version = "0.3.2"
+version = "0.4.0"

@@ -1,9 +1,6 @@
 //! ロータリーエンコーダー補助モジュール
 
-use crate::debug_log;
-
-#[cfg(feature = "bind-c")]
-mod ffi;
+use crate::util::debug_log;
 
 /// ロータリーエンコーダー
 #[derive(Clone, Copy, Debug, Default, Eq, Ord, PartialEq, PartialOrd)]

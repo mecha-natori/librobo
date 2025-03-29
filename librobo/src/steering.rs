@@ -1,22 +1,17 @@
 //! ステアリング補助モジュール
 
 use crate::controller::NormalizedSticks;
-use crate::debug_log;
-use crate::trace_log;
+use crate::util::debug_log;
+use crate::util::trace_log;
 use core::error::Error;
 use core::fmt::Display;
 use core::fmt::Formatter;
 #[cfg(feature = "heapless")]
 use heapless::Vec as HVec;
 use num::Complex;
-#[cfg(feature = "controller")]
-pub use robo_macro::ISteeringFromSticks;
 
 #[cfg(feature = "steering-crawler")]
 pub mod crawler;
-
-#[cfg(feature = "bind-c")]
-mod ffi;
 
 #[cfg(feature = "steering-quad-mechanum")]
 pub mod quad_mechanum;
@@ -140,6 +135,27 @@ pub trait ISteeringFromSticks<const N: usize> {
         pid_data: Option<&mut [PIDData; N]>,
         sticks: NormalizedSticks
     ) -> [i16; N];
+}
+
+#[cfg(feature = "controller")]
+impl<T, const N: usize> ISteeringFromSticks<N> for T
+where
+    T: ISteering<N>
+{
+    /// 速度を計算する。 \[rpm]
+    #[inline]
+    fn calc_speed(
+        steering: Steering,
+        pid_data: Option<&mut [PIDData; N]>,
+        sticks: NormalizedSticks
+    ) -> [i16; N] {
+        <Self as ISteering<N>>::calc_speed(
+            steering,
+            pid_data,
+            Complex::new(sticks.l[0], sticks.l[1]),
+            Complex::new(sticks.r[0], sticks.r[1])
+        )
+    }
 }
 
 /// PIDデータに基づいて目標値を加工する。

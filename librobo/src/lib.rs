@@ -4,12 +4,13 @@
 
 #![allow(unused)]
 #![cfg_attr(not(feature = "std"), no_std)]
+#![feature(decl_macro)]
 #![warn(missing_docs, rustdoc::missing_crate_level_docs)]
 
 #[cfg(feature = "alloc")]
 #[macro_use]
 extern crate alloc;
-#[cfg(feature = "bind-c")]
+#[cfg(feature = "panic-handler")]
 extern crate panic_abort;
 
 #[cfg(feature = "controller")]

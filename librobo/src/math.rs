@@ -65,3 +65,23 @@ macro_rules! impl_float_approximately {
 }
 
 impl_float_approximately!(f32, f64);
+
+/// 線形補間の逆関数
+pub trait InverseLerp<T> {
+    /// 線形補間の逆演算を行う。
+    fn inverse_lerp(from: T, to: T, value: T) -> T;
+}
+
+macro_rules! impl_inverse_lerp {
+    ($($t:ty),*) => {
+        $(
+            impl InverseLerp<$t> for $t {
+                fn inverse_lerp(from: $t, to: $t, value: $t) -> $t {
+                    (value - from) / (to - from)
+                }
+            }
+        )*
+    };
+}
+
+impl_inverse_lerp!(f32, f64, i128, i16, i32, i64, i8, u128, u16, u32, u64, u8);

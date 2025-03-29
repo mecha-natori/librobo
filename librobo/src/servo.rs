@@ -1,9 +1,6 @@
 //! サーボ補助モジュール
 
-use crate::debug_log;
-
-#[cfg(feature = "bind-c")]
-mod ffi;
+use crate::util::debug_log;
 
 /// サーボの情報
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
