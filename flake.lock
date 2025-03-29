@@ -1,25 +1,5 @@
 {
   "nodes": {
-    "esp32-rust": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1725870727,
-        "narHash": "sha256-cx3Lnw2g7evkzlIXq52ihHJFobxKEANMqowC5uibhFg=",
-        "owner": "svelterust",
-        "repo": "esp32",
-        "rev": "be09a0a183482d9c5bb6cc9e5d9c01d43937cc43",
-        "type": "github"
-      },
-      "original": {
-        "owner": "svelterust",
-        "repo": "esp32",
-        "type": "github"
-      }
-    },
     "fenix": {
       "inputs": {
         "nixpkgs": [
@@ -122,7 +102,6 @@
     },
     "root": {
       "inputs": {
-        "esp32-rust": "esp32-rust",
         "fenix": "fenix",
         "flake-parts": "flake-parts",
         "git-hooks": "git-hooks",

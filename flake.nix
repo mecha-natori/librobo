@@ -1,9 +1,5 @@
 {
   inputs = {
-    esp32-rust = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:svelterust/esp32";
-    };
     fenix = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/fenix";
@@ -45,51 +41,19 @@
           pkgs,
           ...
         }:
-        let
-          sources = import ./_sources/generated.nix {
-            inherit (pkgs)
-              dockerTools
-              fetchFromGitHub
-              fetchgit
-              fetchurl
-              ;
-          };
-        in
         {
-          devShells.default =
-            let
-              esp32-rust = inputs'.esp32-rust.packages.esp32.overrideAttrs (
-                _: _: {
-                  inherit (sources.idf-rust) src;
-                }
-              );
-            in
-            pkgs.mkShell {
-              LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath (
-                with pkgs;
-                [
-                  libxml2
-                  stdenv.cc.cc.lib
-                  zlib
-                ]
-              );
-              packages =
-                (with pkgs; [
-                  ldproxy
-                  nvfetcher
-                ])
-                ++ (with inputs'.fenix.packages; [
-                  (combine [
-                    latest.toolchain
-                    targets.thumbv7em-none-eabi.latest.rust-std
-                    targets.thumbv7em-none-eabihf.latest.rust-std
-                  ])
-                ]);
-              shellHook = ''
-                export PATH="$${esp32-rust}/.rustup/toolchains/esp/bin:$PATH"
-                export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
-              '';
-            };
+          devShells.default = pkgs.mkShell {
+            packages = with inputs'.fenix.packages; [
+              (combine [
+                latest.toolchain
+                targets.thumbv7em-none-eabi.latest.rust-std
+                targets.thumbv7em-none-eabihf.latest.rust-std
+              ])
+            ];
+            shellHook = ''
+              export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+            '';
+          };
         };
       systems = import systems;
     };
