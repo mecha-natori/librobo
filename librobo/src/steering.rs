@@ -13,9 +13,6 @@ use num::Complex;
 #[cfg(feature = "steering-crawler")]
 pub mod crawler;
 
-#[cfg(feature = "bind-c")]
-mod ffi;
-
 #[cfg(feature = "steering-quad-mechanum")]
 pub mod quad_mechanum;
 

@@ -10,9 +10,6 @@ use crate::util::debug_log;
 use crate::util::trace_log;
 use num::Complex;
 
-#[cfg(feature = "bind-c")]
-mod ffi;
-
 const N: usize = 2;
 
 /// クローラー

@@ -2,9 +2,6 @@
 
 use crate::util::debug_log;
 
-#[cfg(feature = "bind-c")]
-mod ffi;
-
 /// サーボの情報
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 #[repr(C)]

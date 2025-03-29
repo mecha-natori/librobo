@@ -14,9 +14,6 @@ use num::Complex;
 use num::Float;
 use num::traits::FloatConst;
 
-#[cfg(feature = "bind-c")]
-mod ffi;
-
 const N: usize = 4;
 
 /// 四輪メカナムホイール

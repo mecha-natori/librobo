@@ -22,39 +22,38 @@ path = "src/lib.rs"
 
 [features]
 all = [
-    "controller",
-    "encoder",
-    "heapless",
-    "num/libm",
-    "servo",
-    "steering",
-    "steering-crawler",
-    "steering-quad-mechanum",
-    "steering-quad-omni",
+  "controller",
+  "encoder",
+  "heapless",
+  "num/libm",
+  "servo",
+  "steering",
+  "steering-crawler",
+  "steering-quad-mechanum",
+  "steering-quad-omni",
 ]
 all-alloc = [
-    "alloc-nostd",
-    "controller",
-    "encoder",
-    "servo",
-    "steering",
-    "steering-crawler",
-    "steering-quad-mechanum",
-    "steering-quad-omni",
+  "alloc-nostd",
+  "controller",
+  "encoder",
+  "servo",
+  "steering",
+  "steering-crawler",
+  "steering-quad-mechanum",
+  "steering-quad-omni",
 ]
 all-std = [
-    "controller",
-    "encoder",
-    "servo",
-    "std",
-    "steering",
-    "steering-crawler",
-    "steering-quad-mechanum",
-    "steering-quad-omni",
+  "controller",
+  "encoder",
+  "servo",
+  "std",
+  "steering",
+  "steering-crawler",
+  "steering-quad-mechanum",
+  "steering-quad-omni",
 ]
 alloc = ["num/alloc"]
 alloc-nostd = ["alloc", "num/libm"]
-bind-c = ["panic-handler"]
 controller = []
 default = ["num/libm"]
 encoder = []

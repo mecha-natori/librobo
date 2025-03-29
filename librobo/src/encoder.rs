@@ -2,9 +2,6 @@
 
 use crate::util::debug_log;
 
-#[cfg(feature = "bind-c")]
-mod ffi;
-
 /// ロータリーエンコーダー
 #[derive(Clone, Copy, Debug, Default, Eq, Ord, PartialEq, PartialOrd)]
 #[repr(C)]

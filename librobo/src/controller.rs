@@ -13,9 +13,6 @@ use num::Signed;
 use num::ToPrimitive;
 use num::Unsigned;
 
-#[cfg(feature = "bind-c")]
-mod ffi;
-
 /// 左右スティック
 ///
 /// 各スティックのX軸は右が正であり、Y軸は上が正である。

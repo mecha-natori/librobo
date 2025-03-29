@@ -10,9 +10,9 @@
 
 ## Crates
 
-- [robo](librobo) is a main crate
-- [robo_compat](librobo-compat) is a compatibility library
-- [robo_macro](librobo-macro) is a macro library
+- [robo] is a main crate
+- [robo_compat] is a compatibility library
+- [robo_macro] is a macro library
 
 ## Description
 
@@ -25,20 +25,32 @@
 - Rust 1.56以上
 - `rust-std`コンポーネント(コンパイル済み`core`クレート)  
   下記のコマンドでインストール可能。
-  ``` console
+  ```console
   $ rustup target add <TARGET_TRIPLE>
   ```
 
 ## License
 
-このライブラリは[MIT License](LICENSE.md)の下で頒布されます。
+このライブラリは[MIT License]の下で頒布されます。
 
 ## Contribution
 
-コントリビューション大歓迎です。[メカトロニクス研究部会](https://github.com/mecha-natori)
-の部員はもちろん、外部の方々も[Issue](https://github.com/mecha-natori/librobo/issues)
-や[Pull Request](https://github.com/mecha-natori/librobo/pulls)など送っていただいて構いません。
+コントリビューション大歓迎です。[メカトロニクス研究部会]の部員はもちろん、外部の方々も[Issue]や[Pull Request]など送っていただいて構いません。
 
 ## Authors/Contributors
 
-- Sora Tonami([@ms0503](https://github.com/ms0503)) - 開発メンバー
+- Sora Tonami([@ms0503]) - 開発メンバー
+
+## Related projects
+
+- [mecha-natori/librobo-cxx] - 本ライブラリのC++版
+
+[@ms0503]: https://github.com/ms0503
+[Issue]: https://github.com/mecha-natori/librobo/issues
+[MIT License]: LICENSE.md
+[Pull Request]: https://github.com/mecha-natori/librobo/pulls
+[mecha-natori/librobo-cxx]: https://github.com/mecha-natori/librobo-cxx
+[robo]: librobo
+[robo_compat]: librobo-compat
+[robo_macro]: librobo-macro
+[メカトロニクス研究部会]: https://github.com/mecha-natori
