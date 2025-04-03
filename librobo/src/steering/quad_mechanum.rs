@@ -31,10 +31,18 @@ impl ISteering<N> for QuadMechanum {
         let (l_r, l_theta) = l.to_polar();
         let (r_r, r_theta) = r.to_polar();
         trace_log!(target: "librobo/steering/quad_mechanum", "Lr: {}, Ltheta: {}, Rr: {}, Rtheta: {}", l_r, l_theta, r_r, r_theta);
-        let fr = steering.max_speed as f32 * r_r * (f32::FRAC_PI_4() + r_theta).cos();
-        let fl = steering.max_speed as f32 * l_r * (f32::FRAC_PI_4() - l_theta).cos();
-        let rl = steering.max_speed as f32 * l_r * (3f32 * f32::FRAC_PI_4() - l_theta).cos();
-        let rr = steering.max_speed as f32 * r_r * (3f32 * f32::FRAC_PI_4() + r_theta).cos();
+        let fr = r_r * (f32::FRAC_PI_4() + r_theta).cos() * 2f32 / 2f32.sqrt();
+        let fl = l_r * (f32::FRAC_PI_4() - l_theta).cos() * 2f32 / 2f32.sqrt();
+        let rl = l_r * (3f32 * f32::FRAC_PI_4() - l_theta).cos() * 2f32 / 2f32.sqrt();
+        let rr = r_r * (3f32 * f32::FRAC_PI_4() + r_theta).cos() * 2f32 / 2f32.sqrt();
+        let fr = if 1f32 <= fr.abs() { fr.signum() } else { fr };
+        let fl = if 1f32 <= fl.abs() { fl.signum() } else { fl };
+        let rl = if 1f32 <= rl.abs() { rl.signum() } else { rl };
+        let rr = if 1f32 <= rr.abs() { rr.signum() } else { rr };
+        let fr = fr * steering.max_speed as f32;
+        let fl = fl * steering.max_speed as f32;
+        let rl = rl * steering.max_speed as f32;
+        let rr = rr * steering.max_speed as f32;
         trace_log!(target: "librobo/steering/quad_mechanum", "FR: {}, FL: {}, RL: {}, RR: {}", fr, fl, rl, rr);
         let result = if let Some(mut pid_data) = pid_data {
             debug_log!(target: "librobo/steering/quad_mechanum", "found PID data: {:?}", pid_data);
