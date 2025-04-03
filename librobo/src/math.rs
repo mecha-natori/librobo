@@ -52,19 +52,35 @@ where
     fn approximately(&self, other: &Self) -> bool;
 }
 
-macro_rules! impl_float_approximately {
-    ($($t:ty),*) => {
-        $(
-            impl FloatApproximately<$t> for $t {
-                fn approximately(&self, other: &Self) -> bool {
-                    (self - other).abs() < Self::EPSILON
-                }
+macro impl_float_approximately($($t:ty),*) {
+    $(
+        impl FloatApproximately<$t> for $t {
+            fn approximately(&self, other: &Self) -> bool {
+                (self - other).abs() < Self::EPSILON
             }
-        )*
-    };
+        }
+    )*
 }
 
 impl_float_approximately!(f32, f64);
+
+/// 線形補間
+pub trait Lerp<T> {
+    /// 線形補間を行う。
+    fn lerp(from: T, to: T, value: T) -> T;
+}
+
+macro impl_lerp($($t:ty),*) {
+    $(
+        impl Lerp<$t> for $t {
+            fn lerp(from: $t, to: $t, value: $t) -> $t {
+                value * (to - from) + from
+            }
+        }
+    )*
+}
+
+impl_lerp!(f32, f64, i128, i16, i32, i64, i8, u128, u16, u32, u64, u8);
 
 /// 線形補間の逆関数
 pub trait InverseLerp<T> {
@@ -72,16 +88,14 @@ pub trait InverseLerp<T> {
     fn inverse_lerp(from: T, to: T, value: T) -> T;
 }
 
-macro_rules! impl_inverse_lerp {
-    ($($t:ty),*) => {
-        $(
-            impl InverseLerp<$t> for $t {
-                fn inverse_lerp(from: $t, to: $t, value: $t) -> $t {
-                    (value - from) / (to - from)
-                }
+macro impl_inverse_lerp($($t:ty),*) {
+    $(
+        impl InverseLerp<$t> for $t {
+            fn inverse_lerp(from: $t, to: $t, value: $t) -> $t {
+                (value - from) / (to - from)
             }
-        )*
-    };
+        }
+    )*
 }
 
 impl_inverse_lerp!(f32, f64, i128, i16, i32, i64, i8, u128, u16, u32, u64, u8);

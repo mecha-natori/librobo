@@ -1,5 +1,7 @@
 //! サーボ補助モジュール
 
+use crate::math::InverseLerp;
+use crate::math::Lerp;
 use crate::util::debug_log;
 
 /// サーボの情報
@@ -23,9 +25,11 @@ pub struct ServoDefinition {
 /// max_duty - 100%時のデューティの値
 /// servo    - サーボの仕様データ
 pub fn calc_servo_duty(deg: i16, max_duty: u16, servo: ServoDefinition) -> u16 {
-    let duty = ((deg - servo.min_deg) / (servo.max_deg - servo.min_deg)) as u16
-        * (servo.max_ms - servo.min_ms)
-        + servo.min_ms;
+    let duty = u16::lerp(
+        servo.min_ms,
+        servo.max_ms,
+        i16::inverse_lerp(servo.min_deg, servo.max_deg, deg) as u16
+    );
     debug_log!(target: "librobo/servo", "calc servo duty: {}", duty);
     duty
 }
